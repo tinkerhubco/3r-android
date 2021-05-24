@@ -9,9 +9,10 @@ import com.tinkerhub.replenish.data.models.EventItem
 import com.tinkerhub.replenish.databinding.ItemEventBinding
 
 class EventItemAdapter(
-    private val eventItemList: ArrayList<EventItem>,
     private val listener: EventItemListener? = null
 ) : RecyclerView.Adapter<EventItemAdapter.EventItemViewHolder>() {
+    
+    private val eventItemList = arrayListOf<EventItem>()
     
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventItemViewHolder {
         val binding = DataBindingUtil.inflate<ItemEventBinding>(
@@ -29,6 +30,12 @@ class EventItemAdapter(
     override fun onBindViewHolder(holder: EventItemViewHolder, position: Int) {
         holder.itemView.clearAnimation()
         holder.bind(eventItemList[position])
+    }
+    
+    fun updateList(list: ArrayList<EventItem>) {
+        eventItemList.clear()
+        eventItemList.addAll(list)
+        notifyDataSetChanged()
     }
     
     inner class EventItemViewHolder(

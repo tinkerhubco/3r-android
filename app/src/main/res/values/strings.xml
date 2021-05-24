@@ -26,4 +26,6 @@
     <!-- Item Display Screen -->
     <string name="about_title">About</string>
     <string name="hosted_by_label">Hosted by</string>
+    <string name="button_action_join">Yes, I\'d like to join</string>
+    <string name="label_action_join">Join Event?</string>
 </resources>

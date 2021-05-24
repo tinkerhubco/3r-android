@@ -15,6 +15,7 @@
         android:layout_width="@dimen/dp_320"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/dp_4"
         android:layout_marginBottom="@dimen/default_margin"
         app:cardCornerRadius="@dimen/default_card_view_radius">
 
@@ -27,9 +28,9 @@
                 android:id="@+id/image_view_event_banner"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_150"
+                android:background="@color/design_default_color_primary"
                 android:contentDescription="@null"
-                android:scaleType="centerCrop"
-                app:srcCompat="@mipmap/ic_launcher" />
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -43,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{eventItem.eventDates}"
                     android:textAppearance="?attr/textAppearanceBody1"
-                    android:textColor="@android:color/holo_red_light"
+                    android:textColor="@color/colorBlue1"
                     tools:text="JUN 30 - JUL 5" />
 
                 <TextView

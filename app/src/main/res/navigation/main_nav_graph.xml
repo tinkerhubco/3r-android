@@ -18,6 +18,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_loginFragment_to_exploreFragment"
+            app:destination="@id/exploreFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <dialog
@@ -43,10 +51,16 @@
     </dialog>
 
     <fragment
-        android:id="@+id/itemDisplayFragment"
-        android:name="com.tinkerhub.replenish.features.itemdisplay.ItemDisplayFragment"
+        android:id="@+id/eventItemDisplayFragment"
+        android:name="com.tinkerhub.replenish.features.itemdisplay.event.EventItemDisplayFragment"
         android:label="fragment_item_display"
-        tools:layout="@layout/fragment_item_display" />
+        tools:layout="@layout/fragment_item_display">
+
+        <argument
+            android:name="itemDisplayArg"
+            app:argType="com.tinkerhub.replenish.data.interfaces.ItemDisplayItem"
+            app:nullable="false" />
+    </fragment>
 
     <fragment
         android:id="@+id/registrationInputFragment"
@@ -62,6 +76,21 @@
         <action
             android:id="@+id/action_go_to_next_registrationInputFragment"
             app:destination="@id/registrationInputFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/exploreFragment"
+        android:name="com.tinkerhub.replenish.features.explore.ExploreFragment"
+        android:label="ExploreFragment"
+        tools:layout="@layout/fragment_explore">
+
+        <action
+            android:id="@+id/action_exploreFragment_to_eventItemDisplayFragment"
+            app:destination="@id/eventItemDisplayFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
