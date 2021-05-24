@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dp_32">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_display"
+        android:layout_width="@dimen/dp_260"
+        android:layout_height="@dimen/dp_260"
+        app:cardCornerRadius="@dimen/default_card_view_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_view_display"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:srcCompat="@mipmap/ic_launcher" />
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textview_title"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="@string/login_title"
+        android:textAlignment="center"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/card_view_display"
+        app:layout_constraintStart_toStartOf="@id/card_view_display"
+        app:layout_constraintTop_toBottomOf="@id/card_view_display"
+        tools:text="Your QR Code" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textview_subtitle"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/dp_8"
+        android:text="@string/login_title_subheader"
+        android:textAlignment="center"
+        android:textColor="?android:attr/textColorSecondary"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="@id/card_view_display"
+        app:layout_constraintStart_toStartOf="@id/card_view_display"
+        app:layout_constraintTop_toBottomOf="@id/textview_title"
+        tools:text="Show this QR Code to the organizer when claiming points." />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_action"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:paddingHorizontal="@dimen/dp_48"
+        android:paddingVertical="@dimen/default_padding"
+        android:text="@string/login_button"
+        app:layout_constraintEnd_toEndOf="@id/card_view_display"
+        app:layout_constraintStart_toStartOf="@id/card_view_display"
+        app:layout_constraintTop_toBottomOf="@id/textview_subtitle"
+        tools:text="See Tickets" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_close"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/close"
+        app:layout_constraintEnd_toEndOf="@id/button_action"
+        app:layout_constraintStart_toStartOf="@id/button_action"
+        app:layout_constraintTop_toBottomOf="@id/button_action"
+        app:layout_constraintVertical_bias="1" />
+</androidx.constraintlayout.widget.ConstraintLayout>

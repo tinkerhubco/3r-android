@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.tinkerhub.replenish.features.login.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_registrationInputFragment"
+            app:destination="@id/registrationInputFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/acknowledgementDialog"
+        android:name="com.tinkerhub.replenish.common.dialogs.AcknowledgementDialog"
+        android:label="AcknowledgementDialog"
+        tools:layout="@layout/dialog_fragment_acknowledgment">
+
+        <argument
+            android:name="titleTextArg"
+            app:argType="string"
+            app:nullable="false" />
+
+        <argument
+            android:name="subtitleTextArg"
+            app:argType="string"
+            app:nullable="false" />
+
+        <argument
+            android:name="buttonActionTextArg"
+            app:argType="string"
+            app:nullable="false" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/itemDisplayFragment"
+        android:name="com.tinkerhub.replenish.features.itemdisplay.ItemDisplayFragment"
+        android:label="fragment_item_display"
+        tools:layout="@layout/fragment_item_display" />
+
+    <fragment
+        android:id="@+id/registrationInputFragment"
+        android:name="com.tinkerhub.replenish.features.register.registrationinput.RegistrationInputFragment"
+        android:label="RegistrationInputFragment"
+        tools:layout="@layout/fragment_registration_input">
+
+        <argument
+            android:name="inputKeyArg"
+            app:argType="string"
+            app:nullable="false" />
+
+        <action
+            android:id="@+id/action_go_to_next_registrationInputFragment"
+            app:destination="@id/registrationInputFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+</navigation>

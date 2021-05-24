@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Replenish</string>
+    <string name="next">Next</string>
+    <string name="join">Join</string>
+    <string name="close">Close</string>
+    
+    <!-- Login Screen -->
+    <string name="login_title">@string/login_button</string>
+    <string name="login_title_subheader">Easily find community programs and events near you</string>
+    <string name="username_input_label">Username</string>
+    <string name="password_input_label">Password</string>
+    <string name="login_button">Login</string>
+    <string name="sign_up_button">Sign Up</string>
+    <string name="explore_the_app_label">Explore the app first instead &#x2794;</string>
+
+    <!-- Registration Screen -->
+    <string name="register_title">Register</string>
+    <string name="name_input_label">Full Name</string>
+    <string name="email_input_label">Email</string>
+
+    <!-- Explore Screen-->
+    <string name="explore_title">Explore</string>
+    <string name="upcoming_events_title">Upcoming Events</string>
+    <string name="trending_activities_title">Trending Activities</string>
+
+    <!-- Item Display Screen -->
+    <string name="about_title">About</string>
+    <string name="hosted_by_label">Hosted by</string>
+</resources>

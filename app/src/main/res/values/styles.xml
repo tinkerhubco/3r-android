@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="DefaultButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:padding">@dimen/default_padding</item>
+        <item name="textAllCaps">false</item>
+        <item name="cornerRadius">@dimen/default_button_radius</item>
+    </style>
+
+    <style name="ActionButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:padding">@dimen/default_padding</item>
+    </style>
+</resources>

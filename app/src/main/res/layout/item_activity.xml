@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="activityItem"
+            type="com.tinkerhub.replenish.data.models.ActivityItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:background="@android:color/transparent"
+        android:paddingStart="@dimen/dp_0"
+        android:paddingEnd="@dimen/dp_8">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_activity_banner"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_130"
+            app:cardCornerRadius="@dimen/default_card_view_radius"
+            app:layout_constraintDimensionRatio="4:3.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_view_activity_banner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/design_default_color_primary"
+                android:scaleType="centerCrop"
+                app:srcCompat="@mipmap/ic_launcher" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textview_activity_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_8"
+            android:text="@{activityItem.eventDates}"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textColor="@android:color/holo_red_light"
+            app:layout_constraintStart_toEndOf="@id/card_view_activity_banner"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="JUN 30 - JUL 5" />
+
+        <TextView
+            android:id="@+id/textview_activity_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_8"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{activityItem.name}"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/sp_18"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toTopOf="@id/textview_activity_organizer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/card_view_activity_banner"
+            tools:text="Donate 5kgs of Plastic Bottles (HDPE plastic)" />
+
+        <TextView
+            android:id="@+id/textview_activity_organizer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:text="@{activityItem.organizer}"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintBottom_toTopOf="@id/textview_activity_participant_count"
+            app:layout_constraintStart_toEndOf="@id/card_view_activity_banner"
+            tools:text="Plasticity Community" />
+
+        <TextView
+            android:id="@+id/textview_activity_participant_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:text="@{activityItem.participants + `JOINED`}"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/card_view_activity_banner"
+            tools:text="200 JOINED" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
