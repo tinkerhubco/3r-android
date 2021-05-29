@@ -10,10 +10,12 @@ import javax.inject.Inject
 @HiltViewModel
 class ItemDisplayViewModel @Inject constructor() : ViewModel() {
     
-    val buttonActionClicked = MutableLiveData<Event<Unit>>()
+    val buttonActionClicked = MutableLiveData<Event<ItemDisplayItem>>()
     val itemDisplay = MutableLiveData<ItemDisplayItem>()
     
     fun onButtonActionClicked() {
-        buttonActionClicked.value = Event(Unit)
+        itemDisplay.value?.let {
+            buttonActionClicked.value = Event(it)
+        }
     }
 }

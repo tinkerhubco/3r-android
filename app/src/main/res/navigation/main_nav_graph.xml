@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/exploreFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -35,6 +35,11 @@
         tools:layout="@layout/dialog_fragment_acknowledgment">
 
         <argument
+            android:name="imageUrlArg"
+            app:argType="string"
+            app:nullable="false" />
+
+        <argument
             android:name="titleTextArg"
             app:argType="string"
             app:nullable="false" />
@@ -60,6 +65,10 @@
             android:name="itemDisplayArg"
             app:argType="com.tinkerhub.replenish.data.interfaces.ItemDisplayItem"
             app:nullable="false" />
+
+        <action
+            android:id="@+id/action_eventItemDisplayFragment_to_acknowledgementDialog"
+            app:destination="@id/acknowledgementDialog" />
     </fragment>
 
     <fragment
@@ -95,5 +104,60 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_exploreFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.tinkerhub.replenish.features.profile.UserProfileFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile">
+
+        <argument
+            android:name="userArg"
+            app:argType="com.tinkerhub.replenish.data.models.User"
+            app:nullable="false" />
+
+        <action
+            android:id="@+id/action_userProfileFragment_to_rewardsFragment"
+            app:destination="@id/rewardsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/rewardsFragment"
+        android:name="com.tinkerhub.replenish.features.profile.rewards.RewardsFragment"
+        android:label="fragment_rewards"
+        tools:layout="@layout/fragment_rewards">
+
+        <action
+            android:id="@+id/action_rewardsFragment_to_rewardItemDisplayFragment"
+            app:destination="@id/rewardItemDisplayFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/rewardItemDisplayFragment"
+        android:name="com.tinkerhub.replenish.features.itemdisplay.reward.RewardItemDisplayFragment"
+        android:label="RewardItemDisplayFragment"
+        tools:layout="@layout/fragment_item_display">
+
+        <argument
+            android:name="itemDisplayArg"
+            app:argType="com.tinkerhub.replenish.data.interfaces.ItemDisplayItem"
+            app:nullable="false" />
     </fragment>
 </navigation>

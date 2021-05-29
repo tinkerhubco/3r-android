@@ -21,6 +21,16 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    flavorDimensions "client"
+
+    productFlavors {
+        user
+
+        partner {
+            applicationIdSuffix ".scanner"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -41,6 +51,11 @@ android {
         viewBinding true
         dataBinding true
     }
+}
+
+repositories {
+    // Depending on AndroidX Snapshot Builds to get the latest CameraX libs.
+    maven { url 'https://androidx.dev/snapshots/builds/6787662/artifacts/repository/' }
 }
 
 dependencies {
@@ -73,6 +88,15 @@ dependencies {
 
     // Gson
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    // Glide Image Loading
+    implementation 'io.coil-kt:coil:1.2.1'
+
+    // Shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    // ML Based QR Scanner
+    implementation 'com.github.janjanmedinatera:ml-qr-scanner:1.1.1'
 
     // Dagger
     def daggerVersion = '2.35.1'

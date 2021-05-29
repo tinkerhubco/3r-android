@@ -10,8 +10,11 @@
 
     <color name="colorGrey1">#E0E0E0</color>
     <color name="colorGrey2">#F5F5F5</color>
+    <color name="colorGrey3">#A5A5A5</color>
 
     <color name="colorBlue1">#040F60</color>
+
+    <color name="colorRed1">#D94E7A</color>
 
     <color name="primaryTextColor">@color/black</color>
 </resources>

@@ -24,28 +24,54 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image_view_event_banner"
+                imageUrl="@{eventItem.coverPhotoUrl}"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_150"
-                android:background="@color/design_default_color_primary"
                 android:contentDescription="@null"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                tools:background="@color/colorGrey3" />
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="@dimen/default_padding">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textview_event_date"
+                    dateFormat="@{`MMM dd`}"
+                    endDate="@{eventItem.endDate}"
+                    startDate="@{eventItem.startDate}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{eventItem.eventDates}"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="@color/colorBlue1"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="JUN 30 - JUL 5" />
+
+                <TextView
+                    android:id="@+id/textview_activity_points"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:background="@drawable/background_item_points"
+                    android:paddingHorizontal="@dimen/dp_8"
+                    android:paddingVertical="@dimen/dp_4"
+                    android:text="@{eventItem.rewardPoints + ` PTS`}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="@color/colorRed1"
+                    android:textSize="@dimen/sp_12"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/textview_event_date"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintStart_toEndOf="@id/textview_event_date"
+                    app:layout_constraintTop_toTopOf="@id/textview_event_date"
+                    tools:text="10 PTS" />
 
                 <TextView
                     android:id="@+id/textview_event_title"
@@ -54,24 +80,28 @@
                     android:layout_marginTop="@dimen/dp_8"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:minLines="1"
-                    android:text="@{eventItem.name}"
+                    android:text="@{eventItem.title}"
                     android:textAppearance="?attr/textAppearanceHeadline5"
                     android:textColor="@color/primaryTextColor"
                     android:textSize="@dimen/sp_18"
+                    app:layout_constraintBottom_toTopOf="@id/textview_event_location"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textview_event_date"
                     tools:text="3R Series: Waste Management" />
 
                 <TextView
                     android:id="@+id/textview_event_location"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/dp_0"
                     android:layout_height="wrap_content"
-                    android:text="@{eventItem.location}"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{eventItem.organizer}"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="?android:attr/textColorSecondary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     tools:text="Brgy. Lipunan" />
-
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-
 </layout>

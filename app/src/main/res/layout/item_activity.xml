@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
-            name="activityItem"
+            name="eventItem"
             type="com.tinkerhub.replenish.data.models.EventItem" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/default_margin"
         android:background="@android:color/transparent"
         android:paddingStart="@dimen/dp_0"
-        android:paddingEnd="@dimen/dp_8">
+        android:paddingEnd="@dimen/dp_8"
+        android:paddingBottom="@dimen/default_padding">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view_activity_banner"
@@ -29,24 +29,49 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image_view_activity_banner"
+                imageUrl="@{eventItem.coverPhotoUrl}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/design_default_color_primary"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                tools:background="@color/colorGrey3" />
         </androidx.cardview.widget.CardView>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textview_activity_status"
+            dateFormat="@{`MMM dd`}"
+            endDate="@{eventItem.endDate}"
+            startDate="@{eventItem.startDate}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_8"
-            android:text="@{activityItem.eventDates}"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textColor="@color/colorBlue1"
+            android:textStyle="bold"
+            app:layout_constrainedWidth="true"
             app:layout_constraintStart_toEndOf="@id/card_view_activity_banner"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="JUN 30 - JUL 5" />
+
+        <TextView
+            android:id="@+id/textview_activity_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:background="@drawable/background_item_points"
+            android:paddingHorizontal="@dimen/dp_8"
+            android:paddingVertical="@dimen/dp_4"
+            android:text="@{eventItem.rewardPoints + ` PTS`}"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="@color/colorRed1"
+            android:textSize="@dimen/sp_12"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/textview_activity_status"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@id/textview_activity_status"
+            app:layout_constraintTop_toTopOf="@id/textview_activity_status"
+            tools:text="10 PTS" />
 
         <TextView
             android:id="@+id/textview_activity_title"
@@ -56,7 +81,7 @@
             android:layout_marginTop="@dimen/dp_8"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@{activityItem.name}"
+            android:text="@{eventItem.title}"
             android:textAppearance="?attr/textAppearanceHeadline5"
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/sp_18"
@@ -69,10 +94,12 @@
 
         <TextView
             android:id="@+id/textview_activity_organizer"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_8"
-            android:text="@{activityItem.organizer}"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{eventItem.organizer}"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textColor="?android:attr/textColorSecondary"
             app:layout_constraintBottom_toTopOf="@id/textview_activity_participant_count"
@@ -85,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginBottom="@dimen/dp_8"
-            android:text="@{activityItem.participants + ` JOINED`}"
+            android:text="@{eventItem.participantsCount + ` JOINED`}"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textColor="?android:attr/textColorSecondary"
             app:layout_constraintBottom_toBottomOf="parent"

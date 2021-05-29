@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import com.tinkerhub.replenish.common.ui.setImageUrl
 import com.tinkerhub.replenish.common.utils.autoCleared
 import com.tinkerhub.replenish.databinding.DialogFragmentAcknowledgmentBinding
 
 class AcknowledgementDialog : DialogFragment() {
     
     companion object {
+        const val IMAGE_URL_ARG = "imageUrlArg"
         const val TITLE_TEXT_ARG = "titleTextArg"
         const val SUBTITLE_TEXT_ARG = "subtitleTextArg"
         const val BUTTON_ACTION_TEXT_ARG = "buttonActionTextArg"
@@ -34,6 +36,7 @@ class AcknowledgementDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
+        setImageUrl(binding.imageViewDisplay, arguments?.getString(IMAGE_URL_ARG))
         binding.textviewTitle.text = arguments?.getString(TITLE_TEXT_ARG)
         binding.textviewSubtitle.text = arguments?.getString(SUBTITLE_TEXT_ARG)
         binding.buttonAction.text = arguments?.getString(BUTTON_ACTION_TEXT_ARG)

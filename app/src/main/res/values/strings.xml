@@ -1,9 +1,11 @@
 <resources>
-    <string name="app_name">Replenish</string>
+    <string name="app_name">EcoHero</string>
+    <string name="app_name_scanner">EcoHero Scanner</string>
     <string name="next">Next</string>
     <string name="join">Join</string>
     <string name="close">Close</string>
-    
+    <string name="qr_url_link">https://api.qrserver.com/v1/create-qr-code/?size=600x600&amp;data=%s</string>
+
     <!-- Login Screen -->
     <string name="login_title">@string/login_button</string>
     <string name="login_title_subheader">Easily find community programs and events near you</string>
@@ -18,14 +20,40 @@
     <string name="name_input_label">Full Name</string>
     <string name="email_input_label">Email</string>
 
-    <!-- Explore Screen-->
+    <!-- Explore Screen -->
     <string name="explore_title">Explore</string>
-    <string name="upcoming_events_title">Upcoming Events</string>
+    <string name="upcoming_events_title">Upcoming Activities</string>
     <string name="trending_activities_title">Trending Activities</string>
 
     <!-- Item Display Screen -->
     <string name="about_title">About</string>
+    <string name="mechanics_title">Mechanics</string>
+    <string name="date_format">%s - %s</string>
     <string name="hosted_by_label">Hosted by</string>
     <string name="button_action_join">Yes, I\'d like to join</string>
     <string name="label_action_join">Join Event?</string>
+    <string name="button_action_joined">Claim Points</string>
+    <string name="label_action_joined">You are joining!</string>
+    <string name="button_action_claim_more_points">Generate new QR Code</string>
+    <string name="label_action_claim_more_points">Keep going!</string>
+    <string name="button_action_max_points">See points earned</string>
+    <string name="label_action_max_points">Thank you for joining!</string>
+    <string name="button_action_redeem">Redeem</string>
+    <string name="label_action_redeem">Get rewards for %dpts</string>
+
+    <!-- Profile Screen -->
+    <string name="points_button">Points</string>
+    <string name="rewards_button">Rewards</string>
+    <string name="tickets_button">Tickets</string>
+    <string name="virtual_card_button">Virtual Card</string>
+
+    <!-- Acknowledgement Screen -->
+    <string name="description_show_qr_code">Show this QR Code to the organizer when claiming points.</string>
+    <string name="button_action_see_rewards">See Rewards</string>
+
+    <!-- Rewards Screen -->
+    <string name="subheader_points_available">Points Available</string>
+    <string name="rewards_tab_title">@string/rewards_button</string>
+    <string name="redeemed_tab_title">Redeemed</string>
+    <string name="rewards_for_you_title">Rewards for you</string>
 </resources>

@@ -25,7 +25,8 @@ class RegistrationInputFragment : Fragment() {
     private val sharedViewModel: RegistrationInputSharedViewModel by activityViewModels()
     
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRegistrationInputBinding.inflate(inflater, container, false)
