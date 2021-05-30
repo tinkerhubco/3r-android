@@ -7,8 +7,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import com.tinkerhub.replenish.databinding.ActivityPartnerBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import medina.juanantonio.mlqrscanner.library.Scanner
 import medina.juanantonio.mlqrscanner.library.common.Constants.BarcodeIntent.BARCODE_RAW_RESULT
 
@@ -32,6 +37,10 @@ class PartnerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPartnerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        
+        binding.buttonScanNewQr.setOnClickListener {
+            Scanner.startQR(this, REQUEST_QR)
+        }
         
         if (isCameraPermissionGranted)
             Scanner.startQR(this, REQUEST_QR)
@@ -63,7 +72,13 @@ class PartnerActivity : AppCompatActivity() {
         
         if (requestCode == REQUEST_QR) {
             val rawResult = data?.getStringExtra(BARCODE_RAW_RESULT) ?: ""
-            binding.textViewSampleText.text = rawResult
+            CoroutineScope(Dispatchers.Main).launch {
+                binding.groupPointsBeingAwarded.isVisible = true
+                binding.groupSuccessView.isVisible = false
+                delay(2000)
+                binding.groupPointsBeingAwarded.isVisible = false
+                binding.groupSuccessView.isVisible = true
+            }
         }
     }
 }

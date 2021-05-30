@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/colorGrey2"
     android:padding="@dimen/default_padding"
-    tools:context=".features.PartnerActivity">
+    tools:context=".features.PartnerActivity"
+    tools:ignore="HardcodedText">
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_success_view"
@@ -16,12 +17,14 @@
         app:constraint_referenced_ids="textview_points_awarded_title,
         card_view_user_display_background, textview_event_title,
         textview_reward_points, card_view_user_image, text_view_user_name,
-        text_view_reward_date, button_scan_new_qr" />
+        text_view_reward_date, button_scan_new_qr"
+        tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_points_being_awarded"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:constraint_referenced_ids="progress_awarding_points, textview_awarding_points" />
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
@@ -83,14 +86,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="@dimen/dp_2"
+        android:text="3R Series: Waste Management"
         android:textAlignment="center"
         android:textColor="@color/primaryTextColor"
         app:layout_constraintBottom_toTopOf="@id/textview_reward_points"
         app:layout_constraintEnd_toEndOf="@id/card_view_user_display_background"
         app:layout_constraintStart_toStartOf="@id/card_view_user_display_background"
         app:layout_constraintTop_toTopOf="@id/card_view_user_display_background"
-        app:layout_constraintVertical_chainStyle="packed"
-        tools:text="3R Series: Waste Management" />
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textview_reward_points"
@@ -101,6 +104,7 @@
         android:elevation="@dimen/dp_2"
         android:paddingHorizontal="@dimen/dp_8"
         android:paddingVertical="@dimen/dp_4"
+        android:text="10 PTS"
         android:textAppearance="?attr/textAppearanceBody2"
         android:textColor="@color/colorRed1"
         android:textSize="@dimen/sp_12"
@@ -108,8 +112,7 @@
         app:layout_constraintBottom_toTopOf="@id/card_view_user_image"
         app:layout_constraintEnd_toEndOf="@id/card_view_user_display_background"
         app:layout_constraintStart_toStartOf="@id/card_view_user_display_background"
-        app:layout_constraintTop_toBottomOf="@id/textview_event_title"
-        tools:text="10 PTS" />
+        app:layout_constraintTop_toBottomOf="@id/textview_event_title" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_user_image"
@@ -140,13 +143,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="@dimen/dp_2"
+        android:text="Janjan Medina"
         android:textAlignment="center"
         android:textColor="@color/primaryTextColor"
         app:layout_constraintBottom_toTopOf="@id/text_view_reward_date"
         app:layout_constraintEnd_toEndOf="@id/card_view_user_display_background"
         app:layout_constraintStart_toStartOf="@id/card_view_user_display_background"
-        app:layout_constraintTop_toBottomOf="@id/card_view_user_image"
-        tools:text="Janjan Medina" />
+        app:layout_constraintTop_toBottomOf="@id/card_view_user_image" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_view_reward_date"
@@ -154,14 +157,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="@dimen/dp_2"
+        android:text="May 26, 2021 8:21 AM"
         android:textAlignment="center"
         android:textColor="?android:textColorSecondary"
         android:textSize="@dimen/sp_12"
         app:layout_constraintBottom_toBottomOf="@id/card_view_user_display_background"
         app:layout_constraintEnd_toEndOf="@id/card_view_user_display_background"
         app:layout_constraintStart_toStartOf="@id/card_view_user_display_background"
-        app:layout_constraintTop_toBottomOf="@id/text_view_user_name"
-        tools:text="May 26, 2021 8:21 AM" />
+        app:layout_constraintTop_toBottomOf="@id/text_view_user_name" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_scan_new_qr"

@@ -24,10 +24,13 @@ android {
     flavorDimensions "client"
 
     productFlavors {
-        user
+        user {
+            dimension "client"
+        }
 
         partner {
-            applicationIdSuffix ".scanner"
+            dimension "client"
+            applicationId "com.tinkerhub.replenish.scanner"
         }
     }
 
