@@ -1,0 +1,4 @@
+<resources>
+
+    <string name="qr_scanner_message">Make sure the QR Code is within the frame</string>
+</resources>

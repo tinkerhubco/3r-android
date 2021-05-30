@@ -56,4 +56,9 @@
     <string name="rewards_tab_title">@string/rewards_button</string>
     <string name="redeemed_tab_title">Redeemed</string>
     <string name="rewards_for_you_title">Rewards for you</string>
+
+    <!-- Scanner Success Screen -->
+    <string name="success_title">Points have been awarded!</string>
+    <string name="label_points_being_awarded">Hold on, points being awarded…</string>
+    <string name="button_scan_new_qr">Scan New QR</string>
 </resources>

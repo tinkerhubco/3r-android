@@ -53,12 +53,9 @@ android {
     }
 }
 
-repositories {
-    // Depending on AndroidX Snapshot Builds to get the latest CameraX libs.
-    maven { url 'https://androidx.dev/snapshots/builds/6787662/artifacts/repository/' }
-}
-
 dependencies {
+
+    implementation project(path: ':scanner')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.5.0'
@@ -94,9 +91,6 @@ dependencies {
 
     // Shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
-
-    // ML Based QR Scanner
-    implementation 'com.github.janjanmedinatera:ml-qr-scanner:1.1.1'
 
     // Dagger
     def daggerVersion = '2.35.1'

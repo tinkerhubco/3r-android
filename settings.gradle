@@ -1,2 +1,3 @@
 rootProject.name = "Replenish"
 include ':app'
+include ':scanner'
