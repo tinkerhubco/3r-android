@@ -47,9 +47,13 @@
     <string name="tickets_button">Tickets</string>
     <string name="virtual_card_button">Virtual Card</string>
 
-    <!-- Acknowledgement Screen -->
+    <!-- Acknowledgement Dialog -->
     <string name="description_show_qr_code">Show this QR Code to the organizer when claiming points.</string>
     <string name="button_action_see_rewards">See Rewards</string>
+
+    <!-- Points Received Dialog -->
+    <string name="title_points_received">Points Received!</string>
+    <string name="description_points_received"><b>Congrats!</b> Your hardwork paid off. You deserve it.</string>
 
     <!-- Rewards Screen -->
     <string name="subheader_points_available">Points Available</string>

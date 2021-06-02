@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -61,6 +62,8 @@ class RewardsTabFragment : Fragment(), RewardItemAdapter.RewardItemListener {
             if (!viewModel.isRedeemedTab) return@observe
             rewardItemAdapter.updateList(it)
         }
+        
+        binding.textviewRewardForYou.isVisible = !viewModel.isRedeemedTab
         
         binding.recyclerViewRewards.apply {
             adapter = rewardItemAdapter

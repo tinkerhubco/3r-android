@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="pointsReceived"
+            type="Integer" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/dp_32">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/card_view_display"
+            android:layout_width="@dimen/dp_324"
+            android:layout_height="@dimen/dp_130"
+            android:scaleType="centerCrop"
+            android:src="@drawable/points_received"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.tinkerhub.replenish.common.ui.FontTextView
+            android:id="@+id/textview_title"
+            style="@style/TextAppearance.MaterialComponents.Headline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_points_received"
+            android:textAlignment="center"
+            android:textColor="@color/primaryTextColor"
+            app:customTypeface="@font/archivo_bold"
+            app:layout_constraintBottom_toBottomOf="@id/card_view_display"
+            app:layout_constraintEnd_toEndOf="@id/card_view_display"
+            app:layout_constraintStart_toStartOf="@id/card_view_display" />
+
+        <com.tinkerhub.replenish.common.ui.FontTextView
+            android:id="@+id/textview_subtitle"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_32"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:text="@string/description_points_received"
+            android:textAlignment="center"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="@id/card_view_display"
+            app:layout_constraintStart_toStartOf="@id/card_view_display"
+            app:layout_constraintTop_toBottomOf="@id/textview_title" />
+
+        <com.tinkerhub.replenish.common.ui.FontTextView
+            android:id="@+id/textview_rewarded_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@drawable/background_item_points"
+            android:paddingHorizontal="@dimen/dp_8"
+            android:paddingVertical="@dimen/dp_4"
+            android:text="@{`+` + pointsReceived + ` PTS`}"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="@color/colorRed1"
+            android:textSize="@dimen/sp_12"
+            app:customTypeface="@font/archivo_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_subtitle"
+            tools:text="+10 PTS" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_action"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/dp_32"
+            android:paddingHorizontal="@dimen/dp_48"
+            android:paddingVertical="@dimen/default_padding"
+            android:text="@string/button_action_see_rewards"
+            android:textColor="@color/colorBlue1"
+            app:layout_constraintEnd_toEndOf="@id/card_view_display"
+            app:layout_constraintStart_toStartOf="@id/card_view_display"
+            app:layout_constraintTop_toBottomOf="@id/textview_rewarded_points" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_close"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/close"
+            android:textColor="@color/colorBlue1"
+            app:layout_constraintEnd_toEndOf="@id/button_action"
+            app:layout_constraintStart_toStartOf="@id/button_action"
+            app:layout_constraintTop_toBottomOf="@id/button_action"
+            app:layout_constraintVertical_bias="1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

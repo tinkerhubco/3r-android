@@ -46,21 +46,28 @@
             android:layout_marginHorizontal="@dimen/default_margin"
             android:layout_marginTop="@dimen/dp_88"
             app:cardCornerRadius="@dimen/default_card_view_radius"
+            app:cardElevation="@dimen/dp_2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textview.MaterialTextView
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_silver_banner" />
+        </androidx.cardview.widget.CardView>
+
+        <com.tinkerhub.replenish.common.ui.FontTextView
             android:id="@+id/textview_points"
             style="@style/TextAppearance.MaterialComponents.Headline4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
             android:elevation="@dimen/dp_4"
+            android:text="@{String.format(`%,d`, viewModel.user.rewardPoints)}"
             android:textAlignment="center"
-            android:text="@{viewModel.user.rewardPoints + ``}"
             android:textColor="@color/primaryTextColor"
-            android:textStyle="bold"
+            app:customTypeface="@font/archivo_bold"
             app:layout_constraintBottom_toTopOf="@id/textview_points_available_label"
             app:layout_constraintEnd_toEndOf="@id/card_view_header_background"
             app:layout_constraintStart_toStartOf="@id/card_view_header_background"
@@ -68,7 +75,7 @@
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="2,000" />
 
-        <com.google.android.material.textview.MaterialTextView
+        <com.tinkerhub.replenish.common.ui.FontTextView
             android:id="@+id/textview_points_available_label"
             style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="wrap_content"
@@ -82,20 +89,20 @@
             app:layout_constraintStart_toStartOf="@id/card_view_header_background"
             app:layout_constraintTop_toBottomOf="@id/textview_points" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.tinkerhub.replenish.common.ui.FontTextView
             android:id="@+id/textview_user_level"
             style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
-            android:background="@drawable/background_item_points"
+            android:background="@drawable/background_silver_badge"
             android:elevation="@dimen/dp_4"
             android:paddingHorizontal="@dimen/dp_12"
             android:paddingVertical="@dimen/dp_4"
-            android:textAllCaps="true"
             android:text="@{viewModel.user.level}"
-            android:textColor="?android:textColorSecondary"
-            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:textColor="@color/silverRankTextColor"
+            app:customTypeface="@font/archivo_bold"
             app:layout_constraintBottom_toBottomOf="@id/view_top_background"
             app:layout_constraintEnd_toEndOf="@id/card_view_header_background"
             app:layout_constraintStart_toStartOf="@id/card_view_header_background"
@@ -108,7 +115,9 @@
             android:layout_height="wrap_content"
             android:elevation="@dimen/dp_4"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_top_background">
+            app:layout_constraintTop_toBottomOf="@id/view_top_background"
+            app:tabIndicatorColor="@color/colorBlue1"
+            app:tabSelectedTextColor="@color/colorBlue1">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -124,9 +133,9 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager_rewards_redeemed"
             android:layout_width="@dimen/dp_0"
-            android:elevation="@dimen/dp_4"
             android:layout_height="@dimen/dp_0"
             android:background="@color/white"
+            android:elevation="@dimen/dp_4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

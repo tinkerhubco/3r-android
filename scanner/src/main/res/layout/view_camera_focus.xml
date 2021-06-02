@@ -136,5 +136,4 @@
             android:layout_alignParentBottom="true"
             android:background="#040F60" />
     </RelativeLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

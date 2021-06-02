@@ -37,23 +37,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="@dimen/default_padding">
+                android:paddingHorizontal="@dimen/default_padding"
+                android:paddingBottom="@dimen/default_padding">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/textview_event_date"
                     dateFormat="@{`MMM dd`}"
                     endDate="@{eventItem.endDate}"
                     startDate="@{eventItem.startDate}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="@color/colorBlue1"
-                    android:textStyle="bold"
+                    android:textSize="@dimen/sp_14"
+                    app:customTypeface="@font/archivo_bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="JUN 30 - JUL 5" />
 
-                <TextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/textview_activity_points"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -65,7 +68,7 @@
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="@color/colorRed1"
                     android:textSize="@dimen/sp_12"
-                    android:textStyle="bold"
+                    app:customTypeface="@font/archivo_bold"
                     app:layout_constraintBottom_toBottomOf="@id/textview_event_date"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1"
@@ -73,7 +76,7 @@
                     app:layout_constraintTop_toTopOf="@id/textview_event_date"
                     tools:text="10 PTS" />
 
-                <TextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/textview_event_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -83,13 +86,13 @@
                     android:text="@{eventItem.title}"
                     android:textAppearance="?attr/textAppearanceHeadline5"
                     android:textColor="@color/primaryTextColor"
-                    android:textSize="@dimen/sp_18"
+                    android:textSize="@dimen/sp_16"
                     app:layout_constraintBottom_toTopOf="@id/textview_event_location"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textview_event_date"
                     tools:text="3R Series: Waste Management" />
 
-                <TextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/textview_event_location"
                     android:layout_width="@dimen/dp_0"
                     android:layout_height="wrap_content"
@@ -98,6 +101,7 @@
                     android:text="@{eventItem.organizer}"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="@dimen/sp_16"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:text="Brgy. Lipunan" />

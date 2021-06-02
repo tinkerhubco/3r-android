@@ -41,7 +41,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@mipmap/ic_launcher" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <com.tinkerhub.replenish.common.ui.FontTextView
                 android:id="@+id/textview_title"
                 style="@style/TextAppearance.MaterialComponents.Headline4"
                 android:layout_width="wrap_content"
@@ -50,12 +50,12 @@
                 android:text="@string/register_title"
                 android:textAlignment="center"
                 android:textColor="@color/primaryTextColor"
-                android:textStyle="bold"
+                app:customTypeface="@font/archivo_bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image_view_logo" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <com.tinkerhub.replenish.common.ui.FontTextView
                 android:id="@+id/textview_title_subheader"
                 style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="wrap_content"
@@ -89,7 +89,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_text_item"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/archivo" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton

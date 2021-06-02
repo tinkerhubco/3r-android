@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/default_padding">
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/text_view_explore_title"
                     style="@style/TextAppearance.MaterialComponents.Headline2"
                     android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
                     android:layout_marginTop="@dimen/default_margin"
                     android:text="@string/explore_title"
                     android:textColor="@color/colorBlue1"
-                    android:textStyle="bold"
+                    app:customTypeface="@font/archivo_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,10 +56,11 @@
                         imageUrl="@{viewModel.user.userImageUrl}"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop" />
+                        android:scaleType="centerCrop"
+                        tools:background="@color/colorGrey3" />
                 </com.google.android.material.card.MaterialCardView>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/text_view_upcoming_events_title"
                     style="@style/TextAppearance.MaterialComponents.Body2"
                     android:layout_width="wrap_content"
@@ -69,7 +70,7 @@
                     android:text="@string/upcoming_events_title"
                     android:textAllCaps="true"
                     android:textColor="@color/colorBlue1"
-                    android:textStyle="bold"
+                    app:customTypeface="@font/archivo_bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_view_explore_title" />
 
@@ -85,7 +86,7 @@
                     tools:itemCount="1"
                     tools:listitem="@layout/item_event" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/text_view_trending_activities_title"
                     style="@style/TextAppearance.MaterialComponents.Body2"
                     android:layout_width="wrap_content"
@@ -95,7 +96,7 @@
                     android:text="@string/trending_activities_title"
                     android:textAllCaps="true"
                     android:textColor="@color/colorBlue1"
-                    android:textStyle="bold"
+                    app:customTypeface="@font/archivo_bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/recycler_view_upcoming_events" />
 

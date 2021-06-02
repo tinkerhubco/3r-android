@@ -68,7 +68,7 @@
                         tools:src="@mipmap/ic_launcher" />
                 </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.textview.MaterialTextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/textview_user_name"
                     style="@style/TextAppearance.MaterialComponents.Headline5"
                     android:layout_width="wrap_content"
@@ -77,52 +77,52 @@
                     android:text="@{viewModel.user.name}"
                     android:textAlignment="center"
                     android:textColor="@color/primaryTextColor"
-                    android:textStyle="bold"
+                    app:customTypeface="@font/archivo_bold"
                     app:layout_constraintEnd_toEndOf="@id/card_view_user_profile"
                     app:layout_constraintStart_toStartOf="@id/card_view_user_profile"
                     app:layout_constraintTop_toBottomOf="@id/card_view_user_profile"
                     tools:text="Janjan Medina" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/textview_user_level"
                     style="@style/TextAppearance.MaterialComponents.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:background="@drawable/background_item_points"
+                    android:background="@drawable/background_silver_badge"
                     android:paddingHorizontal="@dimen/dp_12"
                     android:paddingVertical="@dimen/dp_4"
                     android:text="@{viewModel.user.level}"
                     android:textAllCaps="true"
-                    android:textColor="?android:textColorSecondary"
-                    android:textStyle="bold"
+                    android:textColor="@color/silverRankTextColor"
+                    app:customTypeface="@font/archivo_bold"
                     app:layout_constraintEnd_toEndOf="@id/card_view_user_profile"
                     app:layout_constraintStart_toStartOf="@id/card_view_user_profile"
                     app:layout_constraintTop_toBottomOf="@id/textview_user_name"
                     tools:text="Silver" />
 
-                <TextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/textview_activity_points"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_8"
                     android:layout_marginEnd="@dimen/dp_56"
-                    android:background="@drawable/background_item_points"
+                    android:background="@drawable/background_profile_user_points"
                     android:paddingHorizontal="@dimen/dp_8"
                     android:paddingVertical="@dimen/dp_4"
-                    android:text="@{viewModel.user.rewardPoints + ` PTS`}"
+                    android:text="@{String.format(`%,d`, viewModel.user.rewardPoints) + ` PTS`}"
                     android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="@color/colorRed1"
+                    android:textColor="@color/colorBlue2"
                     android:textSize="@dimen/sp_12"
-                    android:textStyle="bold"
-                    android:translationZ="@dimen/dp_4"
+                    android:translationZ="@dimen/dp_2"
+                    app:customTypeface="@font/archivo_bold"
                     app:layout_constraintBottom_toBottomOf="@id/textview_points"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1"
                     app:layout_constraintTop_toTopOf="@id/textview_points"
                     tools:text="10 PTS" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/textview_points"
                     style="@style/TextAppearance.MaterialComponents.Body1"
                     android:layout_width="match_parent"
@@ -137,7 +137,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textview_user_level" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/textview_rewards"
                     style="@style/TextAppearance.MaterialComponents.Body1"
                     android:layout_width="match_parent"
@@ -151,7 +151,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textview_points" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/textview_tickets"
                     style="@style/TextAppearance.MaterialComponents.Body1"
                     android:layout_width="match_parent"
@@ -165,7 +165,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textview_rewards" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/textview_virtual_card"
                     style="@style/TextAppearance.MaterialComponents.Body1"
                     android:layout_width="match_parent"

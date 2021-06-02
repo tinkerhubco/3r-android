@@ -27,7 +27,7 @@
                 android:id="@+id/image_view_event_banner"
                 imageUrl="@{rewardItem.coverPhotoUrl}"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_130"
+                android:layout_height="@dimen/dp_110"
                 android:contentDescription="@null"
                 android:scaleType="centerCrop"
                 tools:background="@color/colorGrey3" />
@@ -38,23 +38,22 @@
                 android:orientation="vertical"
                 android:padding="@dimen/default_padding">
 
-                <TextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/textview_event_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="@{rewardItem.title}"
                     android:textAppearance="?attr/textAppearanceHeadline5"
                     android:textColor="@color/primaryTextColor"
-                    android:textSize="@dimen/sp_18"
+                    android:textSize="@dimen/sp_16"
                     app:layout_constraintBottom_toTopOf="@id/textview_event_location"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="10% OFF" />
 
-                <TextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/textview_event_location"
                     android:layout_width="@dimen/dp_0"
                     android:layout_height="wrap_content"
@@ -63,11 +62,12 @@
                     android:text="@{rewardItem.organizer}"
                     android:textAppearance="?attr/textAppearanceBody1"
                     android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="@dimen/sp_16"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textview_event_title"
                     tools:text="Brgy. Lipunan" />
 
-                <TextView
+                <com.tinkerhub.replenish.common.ui.FontTextView
                     android:id="@+id/textview_activity_points"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="@color/colorRed1"
                     android:textSize="@dimen/sp_12"
-                    android:textStyle="bold"
+                    app:customTypeface="@font/archivo_bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/textview_event_location"
                     tools:text="10 PTS" />

@@ -69,6 +69,10 @@
         <action
             android:id="@+id/action_eventItemDisplayFragment_to_acknowledgementDialog"
             app:destination="@id/acknowledgementDialog" />
+
+        <action
+            android:id="@+id/action_eventItemDisplayFragment_to_pointsReceivedDialog"
+            app:destination="@id/pointsReceivedDialog" />
     </fragment>
 
     <fragment
@@ -160,4 +164,16 @@
             app:argType="com.tinkerhub.replenish.data.interfaces.ItemDisplayItem"
             app:nullable="false" />
     </fragment>
+
+    <dialog
+        android:id="@+id/pointsReceivedDialog"
+        android:name="com.tinkerhub.replenish.common.dialogs.PointsReceivedDialog"
+        android:label="PointsReceivedDialog"
+        tools:layout="@layout/dialog_fragment_points_received">
+
+        <argument
+            android:name="pointsIntArg"
+            app:argType="integer"
+            app:nullable="false" />
+    </dialog>
 </navigation>
