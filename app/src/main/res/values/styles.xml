@@ -10,4 +10,8 @@
     <style name="ActionButton" parent="Widget.MaterialComponents.Button">
         <item name="android:padding">@dimen/default_padding</item>
     </style>
+
+    <style name="PointsProgress" parent="@style/Theme.AppCompat">
+        <item name="colorPrimary">@color/colorRed1</item>
+    </style>
 </resources>
