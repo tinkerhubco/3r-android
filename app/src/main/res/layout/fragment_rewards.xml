@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
             android:elevation="@dimen/dp_4"
-            android:text="@{String.format(`%,d`, viewModel.user.rewardPoints)}"
+            android:text="@{String.format(`%,d`, viewModel.user.points)}"
             android:textAlignment="center"
             android:textColor="@color/primaryTextColor"
             app:customTypeface="@font/archivo_bold"

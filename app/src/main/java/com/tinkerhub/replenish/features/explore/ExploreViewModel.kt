@@ -21,9 +21,11 @@ class ExploreViewModel @Inject constructor() : ViewModel() {
         val faker = Faker()
         
         user.value = User(
-            name = faker.name().fullName(),
-            userImageUrl = faker.company().logo(),
-            rewardPoints = faker.random().nextInt(0, 10000),
+            _id = "staticid",
+            firstName = faker.name().firstName(),
+            lastName = faker.name().lastName(),
+            avatarUrl = faker.company().logo(),
+            points = faker.random().nextInt(0, 10000),
             level = "Silver"
         )
         

@@ -44,6 +44,9 @@
                     android:layout_width="@dimen/dp_64"
                     android:layout_height="@dimen/dp_64"
                     android:layout_marginEnd="@dimen/default_margin"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="@dimen/dp_32"
                     app:layout_constraintBottom_toBottomOf="@id/text_view_explore_title"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +56,7 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/image_view_user_profile"
-                        imageUrl="@{viewModel.user.userImageUrl}"
+                        imageUrl="@{viewModel.user.avatarUrl}"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
@@ -104,7 +107,6 @@
                     android:id="@+id/recycler_view_trending_activities"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/default_margin"
                     android:layout_marginTop="@dimen/default_margin"
                     app:layout_constraintTop_toBottomOf="@id/text_view_trending_activities_title"
                     tools:itemCount="5"

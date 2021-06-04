@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.tinkerhub.replenish.R
 import com.tinkerhub.replenish.common.utils.EventObserver
@@ -43,7 +44,18 @@ class RewardsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
-        binding.viewPagerRewardsRedeemed.adapter = rewardsTabsAdapter
+        binding.viewPagerRewardsRedeemed.apply {
+            adapter = rewardsTabsAdapter
+            
+            registerOnPageChangeCallback(
+                object : ViewPager2.OnPageChangeCallback() {
+                    override fun onPageSelected(position: Int) {
+                        val tab = binding.tabLayoutRewardsRedeemed.getTabAt(position)
+                        binding.tabLayoutRewardsRedeemed.selectTab(tab)
+                    }
+                }
+            )
+        }
         
         binding.tabLayoutRewardsRedeemed.addOnTabSelectedListener(
             object : TabLayout.OnTabSelectedListener {

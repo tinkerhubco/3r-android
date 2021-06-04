@@ -4,6 +4,7 @@
     <string name="next">Next</string>
     <string name="join">Join</string>
     <string name="close">Close</string>
+    <string name="base_url">https://3r-api.tinkerhub.dev/</string>
     <string name="qr_url_link">https://api.qrserver.com/v1/create-qr-code/?size=600x600&amp;data=%s</string>
 
     <!-- Login Screen -->
