@@ -54,6 +54,7 @@
                     tools:visibility="visible" />
 
                 <androidx.constraintlayout.widget.Group
+                    android:id="@+id/group_shimmer_skeleton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="@{safeUnbox(viewModel.itemDisplay._id != ``) ? View.GONE : View.VISIBLE}"

@@ -17,6 +17,7 @@ class RewardItemDisplayFragment : ItemDisplayFragment() {
         super.onViewCreated(view, savedInstanceState)
         
         binding.groupRequiredEventInfo.isVisible = false
+        binding.groupShimmerSkeleton.isVisible = false
         
         binding.buttonItemAction.text = getString(R.string.button_action_redeem)
         
