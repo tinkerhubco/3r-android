@@ -3,6 +3,8 @@ package com.tinkerhub.replenish.data.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.tinkerhub.replenish.R
@@ -13,9 +15,26 @@ import com.tinkerhub.replenish.databinding.ItemEventBinding
 class EventItemAdapter(
     private val listener: EventItemListener? = null,
     private val isActivity: Boolean = false
-) : RecyclerView.Adapter<EventItemAdapter.EventItemViewHolder>() {
-    
-    private val eventItemList = arrayListOf<EventItem>()
+) : ListAdapter<EventItem, EventItemAdapter.EventItemViewHolder>(
+    object : DiffUtil.ItemCallback<EventItem>() {
+        override fun areItemsTheSame(
+            oldItem: EventItem,
+            newItem: EventItem
+        ): Boolean {
+            return oldItem == newItem
+        }
+        
+        override fun areContentsTheSame(
+            oldItem: EventItem,
+            newItem: EventItem
+        ): Boolean {
+            return oldItem._id == newItem._id
+                && oldItem.title == newItem.title
+                && oldItem.coverPhotoUrl == newItem.coverPhotoUrl
+                && oldItem.organizer == newItem.organizer
+        }
+    }
+) {
     
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventItemViewHolder {
         val binding =
@@ -38,17 +57,10 @@ class EventItemAdapter(
         return EventItemViewHolder(binding)
     }
     
-    override fun getItemCount() = eventItemList.size
+    override fun getItemCount() = currentList.size
     
     override fun onBindViewHolder(holder: EventItemViewHolder, position: Int) {
-        holder.itemView.clearAnimation()
-        holder.bind(eventItemList[position])
-    }
-    
-    fun updateList(list: ArrayList<EventItem>) {
-        eventItemList.clear()
-        eventItemList.addAll(list)
-        notifyDataSetChanged()
+        holder.bind(currentList[position])
     }
     
     inner class EventItemViewHolder(
@@ -66,6 +78,7 @@ class EventItemAdapter(
             }
             
             binding.root.setOnClickListener {
+                if (item._id.isEmpty()) return@setOnClickListener
                 listener?.onEventItemClicked(item)
             }
         }

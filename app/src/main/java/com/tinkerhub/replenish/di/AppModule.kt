@@ -15,6 +15,10 @@ import com.tinkerhub.replenish.sources.activity.ActivityRemoteSource
 import com.tinkerhub.replenish.sources.activity.ActivityRepository
 import com.tinkerhub.replenish.sources.activity.IActivityRemoteSource
 import com.tinkerhub.replenish.sources.activity.IActivityRepository
+import com.tinkerhub.replenish.sources.rewards.IRewardRemoteSource
+import com.tinkerhub.replenish.sources.rewards.IRewardRepository
+import com.tinkerhub.replenish.sources.rewards.RewardRemoteSource
+import com.tinkerhub.replenish.sources.rewards.RewardRepository
 import com.tinkerhub.replenish.sources.user.IUserRemoteSource
 import com.tinkerhub.replenish.sources.user.IUserRepository
 import com.tinkerhub.replenish.sources.user.UserRemoteSource
@@ -105,10 +109,9 @@ class AppModule {
     @Singleton
     fun provideUserRemoteSource(
         @ApplicationContext context: Context,
-        apiService: ApiService,
-        dataStoreManager: IDataStoreManager
+        apiService: ApiService
     ): IUserRemoteSource {
-        return UserRemoteSource(context, apiService, dataStoreManager)
+        return UserRemoteSource(context, apiService)
     }
     
     @Provides
@@ -140,5 +143,22 @@ class AppModule {
         activityRemoteSource: IActivityRemoteSource
     ): IActivityRepository {
         return ActivityRepository(activityRemoteSource)
+    }
+    
+    @Provides
+    @Singleton
+    fun provideRewardRemoteSource(
+        @ApplicationContext context: Context,
+        apiService: ApiService
+    ): IRewardRemoteSource {
+        return RewardRemoteSource(context, apiService)
+    }
+    
+    @Provides
+    @Singleton
+    fun provideRewardRepository(
+        rewardRemoteSource: IRewardRemoteSource
+    ): IRewardRepository {
+        return RewardRepository(rewardRemoteSource)
     }
 }

@@ -1,15 +1,16 @@
 package com.tinkerhub.replenish.data.interfaces
 
 import android.os.Parcelable
+import com.tinkerhub.replenish.data.models.Organizer
 
 interface ItemDisplayItem: Parcelable {
-    val _id: Int
+    val _id: String
     val title: String
     val about: String?
     val mechanics: String
     val rewardPoints: Int
     val location: String?
-    val organizer: String?
+    val organizer: Organizer?
     val coverPhotoUrl: String
     val participantsCount: Int?
     val hasJoined: Boolean?

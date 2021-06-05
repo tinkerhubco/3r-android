@@ -5,6 +5,12 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="isRedeemed"
+            type="boolean" />
+
         <variable
             name="rewardItem"
             type="com.tinkerhub.replenish.data.models.RewardItem" />
@@ -18,7 +24,7 @@
         android:layout_marginBottom="@dimen/default_margin"
         app:cardCornerRadius="@dimen/default_card_view_radius">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -30,60 +36,112 @@
                 android:layout_height="@dimen/dp_110"
                 android:contentDescription="@null"
                 android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:background="@color/colorGrey3" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_shimmer_skeleton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/default_padding">
+                android:visibility="@{safeUnbox(rewardItem._id != ``) ? View.GONE : View.VISIBLE}"
+                app:constraint_referenced_ids="shimmer_layout_event_title, shimmer_layout_event_location"
+                tools:visibility="gone" />
 
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/textview_event_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="@{rewardItem.title}"
-                    android:textAppearance="?attr/textAppearanceHeadline5"
-                    android:textColor="@color/primaryTextColor"
-                    android:textSize="@dimen/sp_16"
-                    app:layout_constraintBottom_toTopOf="@id/textview_event_location"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="10% OFF" />
+            <com.tinkerhub.replenish.common.ui.FontTextView
+                android:id="@+id/textview_event_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{rewardItem.title}"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toTopOf="@id/textview_event_location"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_view_event_banner"
+                tools:text="10% OFF" />
 
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/textview_event_location"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="@{rewardItem.organizer}"
-                    android:textAppearance="?attr/textAppearanceBody1"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/sp_16"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textview_event_title"
-                    tools:text="Brgy. Lipunan" />
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_layout_event_title"
+                android:layout_width="@dimen/dp_110"
+                android:layout_height="@dimen/dp_0"
+                android:background="@color/colorGrey3"
+                app:layout_constraintBottom_toBottomOf="@id/textview_event_title"
+                app:layout_constraintStart_toStartOf="@id/textview_event_title"
+                app:layout_constraintTop_toTopOf="@id/textview_event_title"
+                app:shimmer_auto_start="true"
+                app:shimmer_base_alpha="0.7"
+                app:shimmer_direction="left_to_right"
+                app:shimmer_duration="1800"
+                app:shimmer_highlight_alpha="0.6" />
 
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/textview_activity_points"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:background="@drawable/background_item_points"
-                    android:paddingHorizontal="@dimen/dp_8"
-                    android:paddingVertical="@dimen/dp_4"
-                    android:text="@{rewardItem.rewardPoints + ` PTS`}"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="@color/colorRed1"
-                    android:textSize="@dimen/sp_12"
-                    app:customTypeface="@font/archivo_bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textview_event_location"
-                    tools:text="10 PTS" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
+            <com.tinkerhub.replenish.common.ui.FontTextView
+                android:id="@+id/textview_event_location"
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_4"
+                android:layout_marginBottom="@dimen/default_margin"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{rewardItem.organizer.name}"
+                android:textAppearance="?attr/textAppearanceBody1"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/textview_event_title"
+                app:layout_constraintTop_toBottomOf="@id/textview_event_title"
+                tools:text="Brgy. Lipunan" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_layout_event_location"
+                android:layout_width="@dimen/dp_110"
+                android:layout_height="@dimen/dp_0"
+                android:background="@color/colorGrey3"
+                app:layout_constraintBottom_toBottomOf="@id/textview_event_location"
+                app:layout_constraintStart_toStartOf="@id/textview_event_location"
+                app:layout_constraintTop_toTopOf="@id/textview_event_location"
+                app:shimmer_auto_start="true"
+                app:shimmer_base_alpha="0.7"
+                app:shimmer_direction="left_to_right"
+                app:shimmer_duration="1800"
+                app:shimmer_highlight_alpha="0.6" />
+
+            <com.tinkerhub.replenish.common.ui.FontTextView
+                android:id="@+id/textview_activity_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_marginBottom="@dimen/default_margin"
+                android:background="@drawable/background_item_points"
+                android:paddingHorizontal="@dimen/dp_8"
+                android:paddingVertical="@dimen/dp_4"
+                android:text="@{rewardItem.rewardPoints + ` PTS`}"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@color/colorRed1"
+                android:textSize="@dimen/sp_12"
+                android:visibility="@{safeUnbox(rewardItem.rewardPoints != -1) ? View.GONE : View.GONE}"
+                app:customTypeface="@font/archivo_bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/textview_event_title"
+                app:layout_constraintTop_toBottomOf="@id/textview_event_location"
+                tools:text="10 PTS"
+                tools:visibility="gone" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_0"
+                android:alpha=".1"
+                android:background="@color/colorGrey3"
+                android:visibility="@{safeUnbox(isRedeemed) ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

@@ -42,6 +42,7 @@ class LoginFragment : Fragment() {
             false
         )
         binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         
         return binding.root
     }

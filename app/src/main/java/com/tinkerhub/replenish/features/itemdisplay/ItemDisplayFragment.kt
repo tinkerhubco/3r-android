@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.tinkerhub.replenish.R
 import com.tinkerhub.replenish.common.utils.autoCleared
 import com.tinkerhub.replenish.data.interfaces.ItemDisplayItem
+import com.tinkerhub.replenish.data.models.EventItem
 import com.tinkerhub.replenish.databinding.FragmentItemDisplayBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,8 +37,14 @@ open class ItemDisplayFragment : Fragment() {
             false
         )
         binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        
         arguments?.getParcelable<ItemDisplayItem>(ITEM_DISPLAY_ARG).let {
-            viewModel.itemDisplay.value = it
+            if (it is EventItem) {
+                viewModel.getEventDetails(it._id)
+            } else {
+                viewModel.itemDisplay.value = it
+            }
         }
         
         return binding.root

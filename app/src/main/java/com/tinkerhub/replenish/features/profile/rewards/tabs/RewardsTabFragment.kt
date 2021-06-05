@@ -44,8 +44,8 @@ class RewardsTabFragment : Fragment(), RewardItemAdapter.RewardItemListener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRewardsTabBinding.inflate(inflater, container, false)
-        rewardItemAdapter = RewardItemAdapter(this)
         viewModel.isRedeemedTab = arguments?.getBoolean(IS_REDEEMED_TAB_ARG) ?: false
+        rewardItemAdapter = RewardItemAdapter(this, isRedeemed = viewModel.isRedeemedTab)
         
         return binding.root
     }
@@ -55,12 +55,12 @@ class RewardsTabFragment : Fragment(), RewardItemAdapter.RewardItemListener {
         
         rewardsViewModel.availableRewardsList.observe(viewLifecycleOwner) {
             if (viewModel.isRedeemedTab) return@observe
-            rewardItemAdapter.updateList(it)
+            rewardItemAdapter.submitList(it)
         }
         
         rewardsViewModel.redeemedRewardsList.observe(viewLifecycleOwner) {
             if (!viewModel.isRedeemedTab) return@observe
-            rewardItemAdapter.updateList(it)
+            rewardItemAdapter.submitList(it)
         }
         
         binding.textviewRewardForYou.isVisible = !viewModel.isRedeemedTab

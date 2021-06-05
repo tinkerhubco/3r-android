@@ -20,11 +20,7 @@ class RewardItemDisplayFragment : ItemDisplayFragment() {
         
         binding.buttonItemAction.text = getString(R.string.button_action_redeem)
         
-        binding.textviewItemActionLabel.text =
-            getString(
-                R.string.label_action_redeem,
-                viewModel.itemDisplay.value?.rewardPoints
-            )
+        binding.textviewItemActionLabel.text = getString(R.string.label_action_redeem)
         
         viewModel.buttonActionClicked.observe(viewLifecycleOwner, EventObserver {
             if (it !is RewardItem) return@EventObserver

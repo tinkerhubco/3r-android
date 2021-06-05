@@ -1,9 +1,8 @@
-package com.tinkerhub.replenish.sources.user
+package com.tinkerhub.replenish.sources.rewards
 
 import android.content.Context
-import com.tinkerhub.replenish.data.managers.IDataStoreManager
+import android.util.Log
 import com.tinkerhub.replenish.data.models.RewardItem
-import com.tinkerhub.replenish.data.models.User
 import com.tinkerhub.replenish.network.ApiService
 import com.tinkerhub.replenish.network.Result
 import com.tinkerhub.replenish.network.wrapWithResult
@@ -12,25 +11,26 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class UserRemoteSource(
+class RewardRemoteSource(
     context: Context,
     private val apiService: ApiService
-) : BaseRemoteSource(context), IUserRemoteSource {
+) : BaseRemoteSource(context), IRewardRemoteSource {
     
-    override suspend fun requestGetUserProfile(): Result<User> {
+    override suspend fun requestGetRewards(type: String?): Result<List<RewardItem>> {
         return try {
             val response = withContext(Dispatchers.IO) {
-                apiService.getSelf()
+                apiService.getRewards()
             }
             response.wrapWithResult()
         } catch (exception: CancellationException) {
             Result.Cancelled()
         } catch (exception: Exception) {
+            Log.d("DEVELOP", exception.message.toString())
             getDefaultErrorResponse()
         }
     }
 }
 
-interface IUserRemoteSource {
-    suspend fun requestGetUserProfile(): Result<User>
+interface IRewardRemoteSource {
+    suspend fun requestGetRewards(type: String?): Result<List<RewardItem>>
 }

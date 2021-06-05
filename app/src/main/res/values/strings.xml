@@ -4,8 +4,13 @@
     <string name="next">Next</string>
     <string name="join">Join</string>
     <string name="close">Close</string>
+    <string name="loading">Loading…</string>
     <string name="base_url">https://3r-api.tinkerhub.dev/</string>
     <string name="qr_url_link">https://api.qrserver.com/v1/create-qr-code/?size=600x600&amp;data=%s</string>
+
+    <!-- Server Error Message -->
+    <string name="no_internet_connection">Please check your internet connection and try again later.</string>
+    <string name="something_went_wrong">Something went wrong. Try again later.</string>
 
     <!-- Login Screen -->
     <string name="login_title">@string/login_button</string>
@@ -40,17 +45,26 @@
     <string name="button_action_max_points">See points earned</string>
     <string name="label_action_max_points">Thank you for joining!</string>
     <string name="button_action_redeem">Redeem</string>
-    <string name="label_action_redeem">Get rewards for %dpts</string>
+    <string name="label_action_redeem">Get your rewards now!</string>
+
+    <!-- Reward Selector Screen -->
+    <string name="reward_selector_title">Select a reward</string>
+    <string name="reward_selector_subtitle">Choose a reward that you would like to claim.</string>
 
     <!-- Profile Screen -->
     <string name="points_button">Points</string>
     <string name="rewards_button">Rewards</string>
-    <string name="tickets_button">Tickets</string>
-    <string name="virtual_card_button">Virtual Card</string>
+    <string name="edit_profile_button">Edit Profile</string>
+    <string name="logout_button">Logout</string>
+    <string name="bronze_badge">BRONZE</string>
+    <string name="silver_badge">SILVER</string>
+    <string name="gold_badge">GOLD</string>
+    <string name="platinum_badge">PLATINUM</string>
 
     <!-- Acknowledgement Dialog -->
     <string name="description_show_qr_code">Show this QR Code to the organizer when claiming points.</string>
     <string name="button_action_see_rewards">See Rewards</string>
+    <string name="qr_data_format">%s;%s;%s</string>
 
     <!-- Points Received Dialog -->
     <string name="title_points_received">Points Received!</string>
@@ -59,6 +73,7 @@
     <!-- Rewards Screen -->
     <string name="subheader_points_available">Points Available</string>
     <string name="rewards_tab_title">@string/rewards_button</string>
+    <string name="available_tab_title">Available</string>
     <string name="redeemed_tab_title">Redeemed</string>
     <string name="rewards_for_you_title">Rewards for you</string>
 

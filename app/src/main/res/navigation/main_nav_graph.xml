@@ -73,6 +73,14 @@
         <action
             android:id="@+id/action_eventItemDisplayFragment_to_pointsReceivedDialog"
             app:destination="@id/pointsReceivedDialog" />
+
+        <action
+            android:id="@+id/action_eventItemDisplayFragment_to_rewardSelectorFragment"
+            app:destination="@id/rewardSelectorFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -136,6 +144,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_userProfileFragment_to_marketPlaceFragment"
+            app:destination="@id/marketPlaceFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -176,4 +192,26 @@
             app:argType="integer"
             app:nullable="false" />
     </dialog>
+
+    <fragment
+        android:id="@+id/marketPlaceFragment"
+        android:name="com.tinkerhub.replenish.features.marketplace.MarketPlaceFragment"
+        android:label="fragment_market_place"
+        tools:layout="@layout/fragment_market_place" />
+
+    <fragment
+        android:id="@+id/rewardSelectorFragment"
+        android:name="com.tinkerhub.replenish.features.itemdisplay.rewardselector.RewardSelectorFragment"
+        android:label="fragment_reward_selector"
+        tools:layout="@layout/fragment_reward_selector">
+
+        <argument
+            android:name="eventIdArg"
+            app:argType="string"
+            app:nullable="false" />
+
+        <action
+            android:id="@+id/action_rewardSelectorFragment_to_acknowledgementDialog"
+            app:destination="@id/acknowledgementDialog" />
+    </fragment>
 </navigation>

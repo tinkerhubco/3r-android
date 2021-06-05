@@ -19,6 +19,10 @@ class EventItemDisplayFragment : ItemDisplayFragment() {
         viewModel.itemDisplay.observe(viewLifecycleOwner) {
             if (it !is EventItem) return@observe
             when {
+                it._id.isEmpty() -> {
+                    binding.buttonItemAction.text = getString(R.string.loading)
+                    binding.textviewItemActionLabel.text = getString(R.string.loading)
+                }
                 it.hasJoined && it.attemptsCount > 0
                     && it.maxAttemptsCount != it.attemptsCount -> {
                     binding.buttonItemAction.text =
@@ -50,12 +54,7 @@ class EventItemDisplayFragment : ItemDisplayFragment() {
             if (it.hasJoined) {
                 findNavController().navigate(
                     EventItemDisplayFragmentDirections
-                        .actionEventItemDisplayFragmentToAcknowledgementDialog(
-                            imageUrlArg = getString(R.string.qr_url_link, it.title),
-                            titleTextArg = it.title,
-                            subtitleTextArg = getString(R.string.description_show_qr_code),
-                            buttonActionTextArg = getString(R.string.button_action_see_rewards)
-                        )
+                        .actionEventItemDisplayFragmentToRewardSelectorFragment(it._id)
                 )
             } else {
                 Toast.makeText(context, "Join ${it.title} now!", Toast.LENGTH_SHORT).show()

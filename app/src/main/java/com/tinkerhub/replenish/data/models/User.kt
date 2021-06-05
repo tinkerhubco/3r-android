@@ -15,4 +15,16 @@ data class User(
     val avatarUrl: String,
     val points: Int,
     val level: String
-) : Parcelable
+) : Parcelable {
+    
+    companion object {
+        fun getDefault() = User(
+            _id = "",
+            firstName = "",
+            lastName = "",
+            avatarUrl = "",
+            points = -1,
+            level = ""
+        )
+    }
+}

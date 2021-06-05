@@ -35,7 +35,7 @@ class RewardsFragment : Fragment() {
             container,
             false
         )
-        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         rewardsTabsAdapter = RewardsTabsAdapter(this)
         
         return binding.root

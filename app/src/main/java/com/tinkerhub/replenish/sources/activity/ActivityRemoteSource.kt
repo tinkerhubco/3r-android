@@ -1,25 +1,78 @@
 package com.tinkerhub.replenish.sources.activity
 
 import android.content.Context
+import android.util.Log
+import com.tinkerhub.replenish.data.models.EventItem
+import com.tinkerhub.replenish.data.models.User
 import com.tinkerhub.replenish.network.ApiService
+import com.tinkerhub.replenish.network.Result
+import com.tinkerhub.replenish.network.responses.ActivitiesResponse
+import com.tinkerhub.replenish.network.wrapWithResult
+import com.tinkerhub.replenish.sources.BaseRemoteSource
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class ActivityRemoteSource(
-    private val context: Context,
+    context: Context,
     private val apiService: ApiService
-) : IActivityRemoteSource {
+) : BaseRemoteSource(context), IActivityRemoteSource {
     
-    override suspend fun requestGetActivities() {
+    override suspend fun requestGetActivities(): Result<ActivitiesResponse> {
+        return try {
+            val response = withContext(Dispatchers.IO) {
+                apiService.getAllActivities()
+            }
+            response.wrapWithResult()
+        } catch (exception: CancellationException) {
+            Result.Cancelled()
+        } catch (exception: Exception) {
+            getDefaultErrorResponse()
+        }
+    }
+    
+    override suspend fun requestGetActivity(activityId: String): Result<EventItem> {
+        return try {
+            val response = withContext(Dispatchers.IO) {
+                apiService.getActivity(activityId)
+            }
+            response.wrapWithResult()
+        } catch (exception: CancellationException) {
+            Result.Cancelled()
+        } catch (exception: Exception) {
+            Log.d("DEVELOP", exception.message.toString())
+            getDefaultErrorResponse()
+        }
     }
     
     override suspend fun requestJoinActivity() {
     }
     
-    override suspend fun requestClaimActivityPoints() {
+    override suspend fun requestClaimActivityPoints(
+        activityId: String,
+        userId: String,
+        voucherId: String
+    ): Result<User> {
+        return try {
+            val response = withContext(Dispatchers.IO) {
+                apiService.claimActivityPoints(activityId, userId, voucherId)
+            }
+            response.wrapWithResult()
+        } catch (exception: CancellationException) {
+            Result.Cancelled()
+        } catch (exception: Exception) {
+            getDefaultErrorResponse()
+        }
     }
 }
 
 interface IActivityRemoteSource {
-    suspend fun requestGetActivities()
+    suspend fun requestGetActivities(): Result<ActivitiesResponse>
+    suspend fun requestGetActivity(activityId: String): Result<EventItem>
     suspend fun requestJoinActivity()
-    suspend fun requestClaimActivityPoints()
+    suspend fun requestClaimActivityPoints(
+        activityId: String,
+        userId: String,
+        voucherId: String
+    ): Result<User>
 }

@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="eventItem"
             type="com.tinkerhub.replenish.data.models.EventItem" />
@@ -19,6 +21,13 @@
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
         android:paddingHorizontal="@dimen/default_padding">
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_shimmer_skeleton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{safeUnbox(eventItem._id != ``) ? View.GONE : View.VISIBLE}"
+            app:constraint_referenced_ids="shimmer_layout_activity_status, shimmer_layout_activity_title, shimmer_layout_participant_count" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view_activity_banner"
@@ -47,6 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_8"
+            android:minHeight="@dimen/dp_18"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textColor="@color/colorBlue1"
             android:textSize="@dimen/sp_14"
@@ -55,6 +65,20 @@
             app:layout_constraintStart_toEndOf="@id/card_view_activity_banner"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="JUN 30 - JUL 5" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_layout_activity_status"
+            android:layout_width="@dimen/dp_110"
+            android:layout_height="@dimen/dp_0"
+            android:background="@color/colorGrey3"
+            app:layout_constraintBottom_toBottomOf="@id/textview_activity_status"
+            app:layout_constraintStart_toStartOf="@id/textview_activity_status"
+            app:layout_constraintTop_toTopOf="@id/textview_activity_status"
+            app:shimmer_auto_start="true"
+            app:shimmer_base_alpha="0.7"
+            app:shimmer_direction="left_to_right"
+            app:shimmer_duration="1800"
+            app:shimmer_highlight_alpha="0.6" />
 
         <com.tinkerhub.replenish.common.ui.FontTextView
             android:id="@+id/textview_activity_points"
@@ -69,6 +93,7 @@
             android:textAppearance="?attr/textAppearanceBody2"
             android:textColor="@color/colorRed1"
             android:textSize="@dimen/sp_12"
+            android:visibility="@{safeUnbox(eventItem.rewardPoints != -1) ? View.VISIBLE : View.GONE}"
             app:customTypeface="@font/archivo_bold"
             app:layout_constraintBottom_toBottomOf="@id/textview_activity_status"
             app:layout_constraintEnd_toEndOf="parent"
@@ -85,6 +110,7 @@
             android:layout_marginTop="@dimen/dp_8"
             android:ellipsize="end"
             android:maxLines="2"
+            android:minHeight="@dimen/dp_18"
             android:text="@{eventItem.title}"
             android:textAppearance="?attr/textAppearanceHeadline5"
             android:textColor="@color/primaryTextColor"
@@ -97,6 +123,20 @@
             app:layout_constraintTop_toBottomOf="@id/textview_activity_points"
             tools:text="Donate 5kgs of Plastic Bottles (HDPE plastic)" />
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_layout_activity_title"
+            android:layout_width="@dimen/dp_200"
+            android:layout_height="@dimen/dp_0"
+            android:background="@color/colorGrey3"
+            app:layout_constraintBottom_toBottomOf="@id/textview_activity_title"
+            app:layout_constraintStart_toStartOf="@id/textview_activity_title"
+            app:layout_constraintTop_toTopOf="@id/textview_activity_title"
+            app:shimmer_auto_start="true"
+            app:shimmer_base_alpha="0.7"
+            app:shimmer_direction="left_to_right"
+            app:shimmer_duration="1800"
+            app:shimmer_highlight_alpha="0.6" />
+
         <com.tinkerhub.replenish.common.ui.FontTextView
             android:id="@+id/textview_activity_organizer"
             android:layout_width="@dimen/dp_0"
@@ -104,7 +144,8 @@
             android:layout_marginStart="@dimen/dp_8"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@{eventItem.organizer}"
+            android:minHeight="@dimen/dp_18"
+            android:text="@{eventItem.organizer.name}"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/sp_16"
@@ -120,7 +161,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginBottom="@dimen/dp_8"
-            android:text="@{eventItem.participantsCount + ` JOINED`}"
+            android:minHeight="@dimen/dp_18"
+            android:text="@{safeUnbox(eventItem._id != ``) ? eventItem.participantsCount + ` JOINED` : ``}"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/sp_14"
@@ -128,5 +170,19 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/card_view_activity_banner"
             tools:text="200 JOINED" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_layout_participant_count"
+            android:layout_width="@dimen/dp_110"
+            android:layout_height="@dimen/dp_0"
+            android:background="@color/colorGrey3"
+            app:layout_constraintBottom_toBottomOf="@id/textview_activity_participant_count"
+            app:layout_constraintStart_toStartOf="@id/textview_activity_participant_count"
+            app:layout_constraintTop_toTopOf="@id/textview_activity_participant_count"
+            app:shimmer_auto_start="true"
+            app:shimmer_base_alpha="0.7"
+            app:shimmer_direction="left_to_right"
+            app:shimmer_duration="1800"
+            app:shimmer_highlight_alpha="0.6" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".features.marketplace.MarketPlaceFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.tinkerhub.replenish.features.marketplace.MarketPlaceViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/image_button_back"
+            android:layout_width="@dimen/default_icon_dimens"
+            android:layout_height="@dimen/default_icon_dimens"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginTop="@dimen/default_margin"
+            android:background="@null"
+            android:padding="@dimen/dp_8"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_arrow"
+            android:tint="@color/colorGrey3"
+            android:translationZ="@dimen/dp_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_top_background"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_260"
+            android:background="@color/colorGrey2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_header_background"
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="@dimen/dp_240"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:layout_marginTop="@dimen/dp_88"
+            app:cardCornerRadius="@dimen/default_card_view_radius"
+            app:cardElevation="@dimen/dp_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_silver_banner" />
+        </androidx.cardview.widget.CardView>
+
+        <com.tinkerhub.replenish.common.ui.FontTextView
+            android:id="@+id/textview_points"
+            style="@style/TextAppearance.MaterialComponents.Headline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:elevation="@dimen/dp_4"
+            android:text="@{String.format(`%,d`, viewModel.user.points)}"
+            android:textAlignment="center"
+            android:textColor="@color/primaryTextColor"
+            app:customTypeface="@font/archivo_bold"
+            app:layout_constraintBottom_toTopOf="@id/textview_points_available_label"
+            app:layout_constraintEnd_toEndOf="@id/card_view_header_background"
+            app:layout_constraintStart_toStartOf="@id/card_view_header_background"
+            app:layout_constraintTop_toTopOf="@id/card_view_header_background"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="2,000" />
+
+        <com.tinkerhub.replenish.common.ui.FontTextView
+            android:id="@+id/textview_points_available_label"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/dp_4"
+            android:text="@string/subheader_points_available"
+            android:textColor="?android:textColorSecondary"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toTopOf="@id/textview_user_level"
+            app:layout_constraintEnd_toEndOf="@id/card_view_header_background"
+            app:layout_constraintStart_toStartOf="@id/card_view_header_background"
+            app:layout_constraintTop_toBottomOf="@id/textview_points" />
+
+        <com.tinkerhub.replenish.common.ui.FontTextView
+            android:id="@+id/textview_user_level"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@drawable/background_silver_badge"
+            android:elevation="@dimen/dp_4"
+            android:paddingHorizontal="@dimen/dp_12"
+            android:paddingVertical="@dimen/dp_4"
+            android:text="@{viewModel.user.level}"
+            android:textAllCaps="true"
+            android:textColor="@color/silverRankTextColor"
+            app:customTypeface="@font/archivo_bold"
+            app:layout_constraintBottom_toBottomOf="@id/view_top_background"
+            app:layout_constraintEnd_toEndOf="@id/card_view_header_background"
+            app:layout_constraintStart_toStartOf="@id/card_view_header_background"
+            app:layout_constraintTop_toBottomOf="@id/textview_points_available_label"
+            tools:text="Silver" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            android:background="@android:color/white"
+            android:translationZ="@dimen/dp_2"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_top_background">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.tinkerhub.replenish.common.ui.FontTextView
+                    android:id="@+id/textview_reward_for_you"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:text="@string/rewards_for_you_title"
+                    android:textColor="@color/primaryTextColor"
+                    app:customTypeface="@font/archivo_bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Marketplace" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_rewards"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingStart="@dimen/default_padding"
+                    android:paddingTop="@dimen/default_padding"
+                    android:paddingEnd="@dimen/dp_0"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textview_reward_for_you"
+                    app:spanCount="2"
+                    tools:itemCount="6"
+                    tools:listitem="@layout/item_reward" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

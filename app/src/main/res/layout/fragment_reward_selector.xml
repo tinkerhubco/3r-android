@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".features.itemdisplay.rewardselector.RewardSelectorFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/image_button_back"
+            android:layout_width="@dimen/default_icon_dimens"
+            android:layout_height="@dimen/default_icon_dimens"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginTop="@dimen/default_margin"
+            android:background="@null"
+            android:padding="@dimen/dp_8"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_arrow"
+            android:tint="@color/colorGrey3"
+            android:translationZ="@dimen/dp_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_top_background"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_150"
+            android:background="@color/colorBlue3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.tinkerhub.replenish.common.ui.FontTextView
+            android:id="@+id/textview_select_a_reward_title"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reward_selector_title"
+            android:textColor="@android:color/white"
+            app:customTypeface="@font/archivo_bold"
+            app:layout_constraintBottom_toTopOf="@id/textview_select_a_reward_subtitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias=".6"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <com.tinkerhub.replenish.common.ui.FontTextView
+            android:id="@+id/textview_select_a_reward_subtitle"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reward_selector_subtitle"
+            android:textColor="@color/colorGrey2"
+            app:customTypeface="@font/archivo_light"
+            app:layout_constraintBottom_toBottomOf="@id/view_top_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_select_a_reward_title" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_rewards"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0"
+            android:clipToPadding="false"
+            android:paddingStart="@dimen/default_padding"
+            android:paddingTop="@dimen/dp_24"
+            android:paddingEnd="@dimen/dp_0"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_top_background"
+            app:spanCount="2"
+            tools:itemCount="9"
+            tools:listitem="@layout/item_reward" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -15,10 +15,14 @@
 
     <color name="colorBlue1">#040F60</color>
     <color name="colorBlue2">#5F5FBE</color>
+    <color name="colorBlue3">#2A348D</color>
 
     <color name="colorRed1">#D94E7A</color>
 
     <color name="primaryTextColor">@color/black</color>
 
+    <color name="bronzeRankTextColor">#70583C</color>
     <color name="silverRankTextColor">@color/colorGrey4</color>
+    <color name="goldRankTextColor">#75580D</color>
+    <color name="platinumRankTextColor">#FDF3F3</color>
 </resources>

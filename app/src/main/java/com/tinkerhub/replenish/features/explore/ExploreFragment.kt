@@ -14,6 +14,7 @@ import com.tinkerhub.replenish.R
 import com.tinkerhub.replenish.common.utils.autoCleared
 import com.tinkerhub.replenish.data.adapters.EventItemAdapter
 import com.tinkerhub.replenish.data.models.EventItem
+import com.tinkerhub.replenish.data.models.User
 import com.tinkerhub.replenish.databinding.FragmentExploreBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,6 +42,7 @@ class ExploreFragment :
         eventItemAdapter = EventItemAdapter(this, isActivity = false)
         activityItemAdapter = EventItemAdapter(this, isActivity = true)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         
         return binding.root
     }
@@ -59,20 +61,22 @@ class ExploreFragment :
         }
         
         binding.cardViewUserProfile.setOnClickListener {
-            findNavController().navigate(
-                ExploreFragmentDirections
-                    .actionExploreFragmentToUserProfileFragment(
-                        viewModel.user.value ?: return@setOnClickListener
-                    )
-            )
+            if (viewModel.user.value != User.getDefault()) {
+                findNavController().navigate(
+                    ExploreFragmentDirections
+                        .actionExploreFragmentToUserProfileFragment(
+                            viewModel.user.value ?: return@setOnClickListener
+                        )
+                )
+            }
         }
         
         viewModel.eventsList.observe(viewLifecycleOwner) {
-            eventItemAdapter.updateList(it)
+            eventItemAdapter.submitList(it)
         }
         
         viewModel.activitiesList.observe(viewLifecycleOwner) {
-            activityItemAdapter.updateList(it)
+            activityItemAdapter.submitList(it)
         }
     }
     
