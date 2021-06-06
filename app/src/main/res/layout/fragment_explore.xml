@@ -7,15 +7,16 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.tinkerhub.replenish.features.explore.ExploreViewModel" />
+            name="sharedMainViewModel"
+            type="com.tinkerhub.replenish.features.SharedMainViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/layout_swipe_to_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
@@ -56,7 +57,7 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/image_view_user_profile"
-                        imageUrl="@{viewModel.user.avatarUrl}"
+                        imageUrl="@{sharedMainViewModel.user.avatarUrl}"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
@@ -112,6 +113,6 @@
                     tools:itemCount="5"
                     tools:listitem="@layout/item_activity" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </FrameLayout>
 </layout>

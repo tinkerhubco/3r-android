@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +18,9 @@ import com.tinkerhub.replenish.data.adapters.EventItemAdapter
 import com.tinkerhub.replenish.data.models.EventItem
 import com.tinkerhub.replenish.data.models.User
 import com.tinkerhub.replenish.databinding.FragmentExploreBinding
+import com.tinkerhub.replenish.features.SharedMainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ExploreFragment :
@@ -25,6 +29,7 @@ class ExploreFragment :
     
     private var binding: FragmentExploreBinding by autoCleared()
     private val viewModel: ExploreViewModel by viewModels()
+    private val sharedMainViewModel: SharedMainViewModel by activityViewModels()
     private lateinit var eventItemAdapter: EventItemAdapter
     private lateinit var activityItemAdapter: EventItemAdapter
     
@@ -41,7 +46,7 @@ class ExploreFragment :
         )
         eventItemAdapter = EventItemAdapter(this, isActivity = false)
         activityItemAdapter = EventItemAdapter(this, isActivity = true)
-        binding.viewModel = viewModel
+        binding.sharedMainViewModel = sharedMainViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         
         return binding.root
@@ -61,13 +66,20 @@ class ExploreFragment :
         }
         
         binding.cardViewUserProfile.setOnClickListener {
-            if (viewModel.user.value != User.getDefault()) {
-                findNavController().navigate(
-                    ExploreFragmentDirections
-                        .actionExploreFragmentToUserProfileFragment(
-                            viewModel.user.value ?: return@setOnClickListener
-                        )
-                )
+            sharedMainViewModel.user.value?.let {
+                if (it != User.getDefault()) {
+                    findNavController().navigate(
+                        ExploreFragmentDirections
+                            .actionExploreFragmentToUserProfileFragment()
+                    )
+                }
+            }
+        }
+        
+        binding.layoutSwipeToRefresh.setOnRefreshListener {
+            viewModel.viewModelScope.launch {
+                viewModel.loadActivities()
+                binding.layoutSwipeToRefresh.isRefreshing = false
             }
         }
         

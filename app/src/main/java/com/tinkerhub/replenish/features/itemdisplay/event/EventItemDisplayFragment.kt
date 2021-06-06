@@ -2,7 +2,6 @@ package com.tinkerhub.replenish.features.itemdisplay.event
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.tinkerhub.replenish.R
 import com.tinkerhub.replenish.common.utils.EventObserver
@@ -19,45 +18,47 @@ class EventItemDisplayFragment : ItemDisplayFragment() {
         viewModel.itemDisplay.observe(viewLifecycleOwner) {
             if (it !is EventItem) return@observe
             when {
-                it._id.isEmpty() -> {
-                    binding.buttonItemAction.text = getString(R.string.loading)
-                    binding.textviewItemActionLabel.text = getString(R.string.loading)
-                }
+                it._id.isEmpty() -> Unit
                 it.hasJoined && it.attemptsCount > 0
                     && it.maxAttemptsCount != it.attemptsCount -> {
-                    binding.buttonItemAction.text =
+                    binding.buttonText =
                         getString(R.string.button_action_claim_more_points)
-                    binding.textviewItemActionLabel.text =
+                    binding.labelText =
                         getString(R.string.label_action_claim_more_points)
                 }
                 it.hasJoined && it.attemptsCount == 0 -> {
-                    binding.buttonItemAction.text =
+                    binding.buttonText =
                         getString(R.string.button_action_joined)
-                    binding.textviewItemActionLabel.text =
+                    binding.labelText =
                         getString(R.string.label_action_joined)
                 }
                 it.hasJoined && it.maxAttemptsCount == it.attemptsCount -> {
-                    binding.buttonItemAction.text =
+                    binding.buttonText =
                         getString(R.string.button_action_max_points)
-                    binding.textviewItemActionLabel.text =
+                    binding.labelText =
                         getString(R.string.label_action_max_points)
                 }
                 else -> {
-                    binding.buttonItemAction.text = getString(R.string.button_action_join)
-                    binding.textviewItemActionLabel.text = getString(R.string.label_action_join)
+                    binding.buttonText = getString(R.string.button_action_join)
+                    binding.labelText = getString(R.string.label_action_join)
                 }
             }
+    
+            binding.showButtonLoading = it._id.isEmpty()
         }
         
         viewModel.buttonActionClicked.observe(viewLifecycleOwner, EventObserver {
             if (it !is EventItem) return@EventObserver
+            if (binding.showButtonLoading) return@EventObserver
+
             if (it.hasJoined) {
                 findNavController().navigate(
                     EventItemDisplayFragmentDirections
                         .actionEventItemDisplayFragmentToRewardSelectorFragment(it._id)
                 )
             } else {
-                Toast.makeText(context, "Join ${it.title} now!", Toast.LENGTH_SHORT).show()
+                binding.showButtonLoading = true
+                viewModel.joinEvent(it)
             }
         })
     }

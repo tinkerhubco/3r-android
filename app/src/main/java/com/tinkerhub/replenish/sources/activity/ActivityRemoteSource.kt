@@ -1,7 +1,6 @@
 package com.tinkerhub.replenish.sources.activity
 
 import android.content.Context
-import android.util.Log
 import com.tinkerhub.replenish.data.models.EventItem
 import com.tinkerhub.replenish.data.models.User
 import com.tinkerhub.replenish.network.ApiService
@@ -40,12 +39,21 @@ class ActivityRemoteSource(
         } catch (exception: CancellationException) {
             Result.Cancelled()
         } catch (exception: Exception) {
-            Log.d("DEVELOP", exception.message.toString())
             getDefaultErrorResponse()
         }
     }
     
-    override suspend fun requestJoinActivity() {
+    override suspend fun requestJoinActivity(activityId: String): Result<EventItem> {
+        return try {
+            val response = withContext(Dispatchers.IO) {
+                apiService.joinActivity(activityId)
+            }
+            response.wrapWithResult()
+        } catch (exception: CancellationException) {
+            Result.Cancelled()
+        } catch (exception: Exception) {
+            getDefaultErrorResponse()
+        }
     }
     
     override suspend fun requestClaimActivityPoints(
@@ -69,7 +77,7 @@ class ActivityRemoteSource(
 interface IActivityRemoteSource {
     suspend fun requestGetActivities(): Result<ActivitiesResponse>
     suspend fun requestGetActivity(activityId: String): Result<EventItem>
-    suspend fun requestJoinActivity()
+    suspend fun requestJoinActivity(activityId: String): Result<EventItem>
     suspend fun requestClaimActivityPoints(
         activityId: String,
         userId: String,

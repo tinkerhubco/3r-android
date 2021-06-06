@@ -30,6 +30,14 @@ class ItemDisplayViewModel @Inject constructor(
         }
     }
     
+    fun joinEvent(eventItem: EventItem) {
+        viewModelScope.launch {
+            activityRepository.joinActivity(eventItem._id)?.let {
+                itemDisplay.value = activityRepository.getActivity(it._id)
+            }
+        }
+    }
+    
     fun onButtonActionClicked() {
         itemDisplay.value?.let {
             buttonActionClicked.value = Event(it)

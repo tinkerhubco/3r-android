@@ -26,11 +26,9 @@ interface ApiService {
     ): Response<EventItem>
     
     @POST("api/activities/{activityId}/join")
-    @FormUrlEncoded
     suspend fun joinActivity(
-        @Path("activityId") activityId: String,
-        @Field("userId") userId: String
-    )
+        @Path("activityId") activityId: String
+    ): Response<EventItem>
     
     @POST("api/activities/{activityId}/claim-vouchers")
     @FormUrlEncoded

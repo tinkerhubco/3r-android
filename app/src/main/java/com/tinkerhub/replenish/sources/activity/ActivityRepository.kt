@@ -31,7 +31,14 @@ class ActivityRepository(
         } else null
     }
     
-    override suspend fun joinActivity() {
+    override suspend fun joinActivity(activityId: String): EventItem? {
+        val joinActivityResult = remoteSource.requestJoinActivity(
+            activityId
+        )
+        
+        return if (joinActivityResult is Result.Success) {
+            joinActivityResult.data
+        } else null
     }
     
     override suspend fun claimActivityPoints(
@@ -54,7 +61,7 @@ class ActivityRepository(
 interface IActivityRepository {
     suspend fun getActivities(): ActivitiesResponse
     suspend fun getActivity(activityId: String): EventItem?
-    suspend fun joinActivity()
+    suspend fun joinActivity(activityId: String): EventItem?
     suspend fun claimActivityPoints(
         activityId: String,
         userId: String,

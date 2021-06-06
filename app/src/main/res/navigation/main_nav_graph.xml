@@ -51,8 +51,9 @@
 
         <argument
             android:name="buttonActionTextArg"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="false" />
+            app:nullable="true" />
     </dialog>
 
     <fragment
@@ -65,14 +66,6 @@
             android:name="itemDisplayArg"
             app:argType="com.tinkerhub.replenish.data.interfaces.ItemDisplayItem"
             app:nullable="false" />
-
-        <action
-            android:id="@+id/action_eventItemDisplayFragment_to_acknowledgementDialog"
-            app:destination="@id/acknowledgementDialog" />
-
-        <action
-            android:id="@+id/action_eventItemDisplayFragment_to_pointsReceivedDialog"
-            app:destination="@id/pointsReceivedDialog" />
 
         <action
             android:id="@+id/action_eventItemDisplayFragment_to_rewardSelectorFragment"
@@ -132,11 +125,6 @@
         android:label="fragment_user_profile"
         tools:layout="@layout/fragment_user_profile">
 
-        <argument
-            android:name="userArg"
-            app:argType="com.tinkerhub.replenish.data.models.User"
-            app:nullable="false" />
-
         <action
             android:id="@+id/action_userProfileFragment_to_rewardsFragment"
             app:destination="@id/rewardsFragment"
@@ -179,6 +167,10 @@
             android:name="itemDisplayArg"
             app:argType="com.tinkerhub.replenish.data.interfaces.ItemDisplayItem"
             app:nullable="false" />
+
+        <action
+            android:id="@+id/action_rewardItemDisplayFragment_to_acknowledgementDialog"
+            app:destination="@id/acknowledgementDialog" />
     </fragment>
 
     <dialog

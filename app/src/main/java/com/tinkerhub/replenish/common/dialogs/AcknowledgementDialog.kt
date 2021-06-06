@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import com.tinkerhub.replenish.common.ui.setImageUrl
 import com.tinkerhub.replenish.common.utils.autoCleared
@@ -39,7 +40,10 @@ class AcknowledgementDialog : DialogFragment() {
         setImageUrl(binding.imageViewDisplay, arguments?.getString(IMAGE_URL_ARG))
         binding.textviewTitle.text = arguments?.getString(TITLE_TEXT_ARG)
         binding.textviewSubtitle.text = arguments?.getString(SUBTITLE_TEXT_ARG)
-        binding.buttonAction.text = arguments?.getString(BUTTON_ACTION_TEXT_ARG)
+        arguments?.getString(BUTTON_ACTION_TEXT_ARG).let {
+            binding.buttonAction.text = it
+            binding.buttonAction.isVisible = !it.isNullOrEmpty()
+        }
         
         binding.buttonAction.setOnClickListener {
             dismiss()

@@ -63,6 +63,7 @@
 
     <!-- Acknowledgement Dialog -->
     <string name="description_show_qr_code">Show this QR Code to the organizer when claiming points.</string>
+    <string name="description_claim_rewards">Show this QR Code to the partner store when claiming your rewards.</string>
     <string name="button_action_see_rewards">See Rewards</string>
     <string name="qr_data_format">%s;%s;%s</string>
 

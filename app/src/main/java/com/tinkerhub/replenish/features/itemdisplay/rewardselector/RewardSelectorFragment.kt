@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,6 +16,7 @@ import com.tinkerhub.replenish.common.utils.autoCleared
 import com.tinkerhub.replenish.data.adapters.RewardItemAdapter
 import com.tinkerhub.replenish.data.models.RewardItem
 import com.tinkerhub.replenish.databinding.FragmentRewardSelectorBinding
+import com.tinkerhub.replenish.features.SharedMainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,6 +28,7 @@ class RewardSelectorFragment : Fragment(), RewardItemAdapter.RewardItemListener 
     
     private var binding: FragmentRewardSelectorBinding by autoCleared()
     private val viewModel: RewardSelectorViewModel by viewModels()
+    private val sharedMainViewModel: SharedMainViewModel by activityViewModels()
     private lateinit var rewardItemAdapter: RewardItemAdapter
     
     override fun onCreateView(
@@ -52,10 +55,6 @@ class RewardSelectorFragment : Fragment(), RewardItemAdapter.RewardItemListener 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         
-        viewModel.rewardsList.observe(viewLifecycleOwner) {
-            rewardItemAdapter.submitList(it)
-        }
-        
         binding.imageButtonBack.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -63,6 +62,10 @@ class RewardSelectorFragment : Fragment(), RewardItemAdapter.RewardItemListener 
         binding.recyclerViewRewards.apply {
             adapter = rewardItemAdapter
             layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
+        }
+    
+        viewModel.rewardsList.observe(viewLifecycleOwner) {
+            rewardItemAdapter.submitList(it)
         }
     }
     
@@ -75,7 +78,7 @@ class RewardSelectorFragment : Fragment(), RewardItemAdapter.RewardItemListener 
                         getString(
                             R.string.qr_data_format,
                             item.activityId,
-                            "60b762733a18d95422519836",
+                            sharedMainViewModel.user.value?._id,
                             item._id
                         )
                     ),
