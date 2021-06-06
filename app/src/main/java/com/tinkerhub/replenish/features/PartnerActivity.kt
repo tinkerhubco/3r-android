@@ -4,15 +4,16 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.viewModelScope
+import com.tinkerhub.replenish.R
 import com.tinkerhub.replenish.databinding.ActivityPartnerBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import medina.juanantonio.mlqrscanner.library.Scanner
 import medina.juanantonio.mlqrscanner.library.common.Constants.BarcodeIntent.BARCODE_RAW_RESULT
@@ -26,6 +27,7 @@ class PartnerActivity : AppCompatActivity() {
     }
     
     private lateinit var binding: ActivityPartnerBinding
+    private val viewModel: PartnerViewModel by viewModels()
     
     private val isCameraPermissionGranted: Boolean
         get() = ContextCompat.checkSelfPermission(
@@ -35,8 +37,15 @@ class PartnerActivity : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPartnerBinding.inflate(layoutInflater)
+        binding = DataBindingUtil.inflate(
+            layoutInflater,
+            R.layout.activity_partner,
+            null,
+            false
+        )
         setContentView(binding.root)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
         
         binding.buttonScanNewQr.setOnClickListener {
             Scanner.startQR(this, REQUEST_QR)
@@ -71,14 +80,18 @@ class PartnerActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         
         if (requestCode == REQUEST_QR) {
-            val rawResult = data?.getStringExtra(BARCODE_RAW_RESULT) ?: ""
-            CoroutineScope(Dispatchers.Main).launch {
-                binding.groupPointsBeingAwarded.isVisible = true
-                binding.groupSuccessView.isVisible = false
-                delay(2000)
-                binding.groupPointsBeingAwarded.isVisible = false
-                binding.groupSuccessView.isVisible = true
+            viewModel.viewModelScope.launch {
+                val rawResult = data?.getStringExtra(BARCODE_RAW_RESULT) ?: ""
+    
+                displaySuccessView(false)
+                viewModel.sendActivityPoints(rawResult)
+                displaySuccessView(true)
             }
         }
+    }
+    
+    private fun displaySuccessView(show: Boolean) {
+        binding.groupPointsBeingAwarded.isVisible = !show
+        binding.groupSuccessView.isVisible = show
     }
 }

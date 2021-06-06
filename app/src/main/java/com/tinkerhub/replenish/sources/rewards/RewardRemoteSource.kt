@@ -1,7 +1,6 @@
 package com.tinkerhub.replenish.sources.rewards
 
 import android.content.Context
-import android.util.Log
 import com.tinkerhub.replenish.data.models.RewardItem
 import com.tinkerhub.replenish.network.ApiService
 import com.tinkerhub.replenish.network.Result
@@ -25,7 +24,6 @@ class RewardRemoteSource(
         } catch (exception: CancellationException) {
             Result.Cancelled()
         } catch (exception: Exception) {
-            Log.d("DEVELOP", exception.message.toString())
             getDefaultErrorResponse()
         }
     }

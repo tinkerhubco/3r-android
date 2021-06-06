@@ -22,97 +22,104 @@
             android:fillViewport="true"
             tools:ignore="UselessParent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/default_padding">
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                tools:ignore="UselessParent">
 
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/text_view_explore_title"
-                    style="@style/TextAppearance.MaterialComponents.Headline2"
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:text="@string/explore_title"
-                    android:textColor="@color/colorBlue1"
-                    app:customTypeface="@font/archivo_medium"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:paddingTop="@dimen/default_padding">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card_view_user_profile"
-                    android:layout_width="@dimen/dp_64"
-                    android:layout_height="@dimen/dp_64"
-                    android:layout_marginEnd="@dimen/default_margin"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    app:cardCornerRadius="@dimen/dp_32"
-                    app:layout_constraintBottom_toBottomOf="@id/text_view_explore_title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1"
-                    app:layout_constraintStart_toEndOf="@id/text_view_explore_title"
-                    app:layout_constraintTop_toTopOf="@id/text_view_explore_title">
+                    <com.tinkerhub.replenish.common.ui.FontTextView
+                        android:id="@+id/text_view_explore_title"
+                        style="@style/TextAppearance.MaterialComponents.Headline2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/default_margin"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:text="@string/explore_title"
+                        android:textColor="@color/colorBlue1"
+                        app:customTypeface="@font/archivo_medium"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/image_view_user_profile"
-                        imageUrl="@{sharedMainViewModel.user.avatarUrl}"
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_view_user_profile"
+                        android:layout_width="@dimen/dp_64"
+                        android:layout_height="@dimen/dp_64"
+                        android:layout_marginEnd="@dimen/default_margin"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="@dimen/dp_32"
+                        app:layout_constraintBottom_toBottomOf="@id/text_view_explore_title"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1"
+                        app:layout_constraintStart_toEndOf="@id/text_view_explore_title"
+                        app:layout_constraintTop_toTopOf="@id/text_view_explore_title">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/image_view_user_profile"
+                            imageUrl="@{sharedMainViewModel.user.avatarUrl}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            tools:background="@color/colorGrey3" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.tinkerhub.replenish.common.ui.FontTextView
+                        android:id="@+id/text_view_upcoming_events_title"
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/default_margin"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:text="@string/upcoming_events_title"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorBlue1"
+                        app:customTypeface="@font/archivo_bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_view_explore_title" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_upcoming_events"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        tools:background="@color/colorGrey3" />
-                </com.google.android.material.card.MaterialCardView>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:clipToPadding="false"
+                        android:paddingStart="@dimen/dp_0"
+                        android:paddingEnd="@dimen/default_padding"
+                        app:layout_constraintTop_toBottomOf="@id/text_view_upcoming_events_title"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/item_event" />
 
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/text_view_upcoming_events_title"
-                    style="@style/TextAppearance.MaterialComponents.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:text="@string/upcoming_events_title"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorBlue1"
-                    app:customTypeface="@font/archivo_bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_view_explore_title" />
+                    <com.tinkerhub.replenish.common.ui.FontTextView
+                        android:id="@+id/text_view_trending_activities_title"
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/default_margin"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:text="@string/trending_activities_title"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorBlue1"
+                        app:customTypeface="@font/archivo_bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/recycler_view_upcoming_events" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view_upcoming_events"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:clipToPadding="false"
-                    android:paddingStart="@dimen/dp_0"
-                    android:paddingEnd="@dimen/default_padding"
-                    app:layout_constraintTop_toBottomOf="@id/text_view_upcoming_events_title"
-                    tools:itemCount="1"
-                    tools:listitem="@layout/item_event" />
-
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/text_view_trending_activities_title"
-                    style="@style/TextAppearance.MaterialComponents.Body2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/default_margin"
-                    android:text="@string/trending_activities_title"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorBlue1"
-                    app:customTypeface="@font/archivo_bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/recycler_view_upcoming_events" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view_trending_activities"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/default_margin"
-                    app:layout_constraintTop_toBottomOf="@id/text_view_trending_activities_title"
-                    tools:itemCount="5"
-                    tools:listitem="@layout/item_activity" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_trending_activities"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        app:layout_constraintTop_toBottomOf="@id/text_view_trending_activities_title"
+                        tools:itemCount="5"
+                        tools:listitem="@layout/item_activity" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </FrameLayout>
 </layout>

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.tinkerhub.replenish.R
 import com.tinkerhub.replenish.common.utils.autoCleared
@@ -14,6 +15,7 @@ import com.tinkerhub.replenish.data.interfaces.ItemDisplayItem
 import com.tinkerhub.replenish.data.models.EventItem
 import com.tinkerhub.replenish.databinding.FragmentItemDisplayBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 open class ItemDisplayFragment : Fragment() {
@@ -41,7 +43,9 @@ open class ItemDisplayFragment : Fragment() {
         
         arguments?.getParcelable<ItemDisplayItem>(ITEM_DISPLAY_ARG).let {
             if (it is EventItem) {
-                viewModel.getEventDetails(it._id)
+                viewModel.viewModelScope.launch {
+                    viewModel.getEventDetails(it._id)
+                }
             } else {
                 viewModel.itemDisplay.value = it
             }

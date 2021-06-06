@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity
-data class User(
+open class User(
     @PrimaryKey
     val _id: String,
     val firstName: String,

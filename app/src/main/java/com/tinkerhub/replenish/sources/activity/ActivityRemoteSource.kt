@@ -2,10 +2,10 @@ package com.tinkerhub.replenish.sources.activity
 
 import android.content.Context
 import com.tinkerhub.replenish.data.models.EventItem
-import com.tinkerhub.replenish.data.models.User
 import com.tinkerhub.replenish.network.ApiService
 import com.tinkerhub.replenish.network.Result
 import com.tinkerhub.replenish.network.responses.ActivitiesResponse
+import com.tinkerhub.replenish.network.responses.ClaimPointsResponse
 import com.tinkerhub.replenish.network.wrapWithResult
 import com.tinkerhub.replenish.sources.BaseRemoteSource
 import kotlinx.coroutines.CancellationException
@@ -60,7 +60,7 @@ class ActivityRemoteSource(
         activityId: String,
         userId: String,
         voucherId: String
-    ): Result<User> {
+    ): Result<ClaimPointsResponse> {
         return try {
             val response = withContext(Dispatchers.IO) {
                 apiService.claimActivityPoints(activityId, userId, voucherId)
@@ -82,5 +82,5 @@ interface IActivityRemoteSource {
         activityId: String,
         userId: String,
         voucherId: String
-    ): Result<User>
+    ): Result<ClaimPointsResponse>
 }

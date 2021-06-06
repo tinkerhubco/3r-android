@@ -4,6 +4,7 @@ import com.tinkerhub.replenish.data.models.EventItem
 import com.tinkerhub.replenish.data.models.RewardItem
 import com.tinkerhub.replenish.data.models.User
 import com.tinkerhub.replenish.network.responses.ActivitiesResponse
+import com.tinkerhub.replenish.network.responses.ClaimPointsResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -36,5 +37,5 @@ interface ApiService {
         @Path("activityId") activityId: String,
         @Field("userId") userId: String,
         @Field("voucherId") voucherId: String
-    ): Response<User>
+    ): Response<ClaimPointsResponse>
 }

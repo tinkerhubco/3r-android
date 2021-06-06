@@ -1,9 +1,9 @@
 package com.tinkerhub.replenish.sources.activity
 
 import com.tinkerhub.replenish.data.models.EventItem
-import com.tinkerhub.replenish.data.models.User
 import com.tinkerhub.replenish.network.Result
 import com.tinkerhub.replenish.network.responses.ActivitiesResponse
+import com.tinkerhub.replenish.network.responses.ClaimPointsResponse
 
 class ActivityRepository(
     private val remoteSource: IActivityRemoteSource
@@ -45,7 +45,7 @@ class ActivityRepository(
         activityId: String,
         userId: String,
         voucherId: String
-    ): User? {
+    ): ClaimPointsResponse? {
         val activityPointsResult = remoteSource.requestClaimActivityPoints(
             activityId,
             userId,
@@ -66,5 +66,5 @@ interface IActivityRepository {
         activityId: String,
         userId: String,
         voucherId: String
-    ): User?
+    ): ClaimPointsResponse?
 }
