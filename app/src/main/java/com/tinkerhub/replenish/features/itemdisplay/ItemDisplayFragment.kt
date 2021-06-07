@@ -44,10 +44,22 @@ open class ItemDisplayFragment : Fragment() {
         arguments?.getParcelable<ItemDisplayItem>(ITEM_DISPLAY_ARG).let {
             if (it is EventItem) {
                 viewModel.viewModelScope.launch {
+                    viewModel.itemDisplay.value = EventItem.getDefault()
                     viewModel.getEventDetails(it._id)
                 }
             } else {
                 viewModel.itemDisplay.value = it
+            }
+        }
+        
+        binding.layoutSwipeToRefresh.setOnRefreshListener {
+            viewModel.viewModelScope.launch {
+                viewModel.itemDisplay.value.let {
+                    if (it is EventItem) {
+                        viewModel.getEventDetails(it._id)
+                    }
+                    binding.layoutSwipeToRefresh.isRefreshing = false
+                }
             }
         }
         

@@ -23,21 +23,32 @@ class RewardsViewModel @Inject constructor(
     
     init {
         viewModelScope.launch {
-            val mockAvailableRewardsList = arrayListOf<RewardItem>()
-            val mockRedeemedRewardsList = arrayListOf<RewardItem>()
+            loadSkeleton()
+            loadRewards(redeemed = false)
+            loadRewards(redeemed = true)
+        }
+    }
+    
+    private fun loadSkeleton() {
+        val mockAvailableRewardsList = arrayListOf<RewardItem>()
+        val mockRedeemedRewardsList = arrayListOf<RewardItem>()
+        
+        for (i in 1..6) {
+            val mockItem = RewardItem.getDefault()
             
-            for (i in 1..6) {
-                val mockItem = RewardItem.getDefault()
-                
-                mockAvailableRewardsList.add(mockItem)
-                mockRedeemedRewardsList.add(mockItem)
-            }
-
-            availableRewardsList.value = mockAvailableRewardsList
-            redeemedRewardsList.value = mockRedeemedRewardsList
-
-            availableRewardsList.value = ArrayList(rewardRepository.getRewards(null))
+            mockAvailableRewardsList.add(mockItem)
+            mockRedeemedRewardsList.add(mockItem)
+        }
+        
+        availableRewardsList.value = mockAvailableRewardsList
+        redeemedRewardsList.value = mockRedeemedRewardsList
+    }
+    
+    suspend fun loadRewards(redeemed: Boolean) {
+        if (redeemed) {
             redeemedRewardsList.value = ArrayList(rewardRepository.getRewards("redeemed"))
+        } else {
+            availableRewardsList.value = ArrayList(rewardRepository.getRewards(null))
         }
     }
 }

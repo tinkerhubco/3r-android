@@ -18,7 +18,6 @@ class ItemDisplayViewModel @Inject constructor(
     val itemDisplay = MutableLiveData<ItemDisplayItem>()
     
     suspend fun getEventDetails(activityId: String) {
-        itemDisplay.value = EventItem.getDefault()
         itemDisplay.value = activityRepository.getActivity(activityId)
     }
     

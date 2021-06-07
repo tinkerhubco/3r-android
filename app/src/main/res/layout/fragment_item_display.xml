@@ -44,474 +44,478 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ScrollView
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/layout_swipe_to_refresh"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_0"
-            android:fillViewport="true"
             app:layout_constraintBottom_toTopOf="@id/layout_action"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="UselessParent">
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-                <androidx.constraintlayout.widget.Group
-                    android:id="@+id/group_required_event_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:constraint_referenced_ids="textview_overall_points, textview_completion_status, progress_bar_points, image_view_date_icon, textview_event_date, textview_event_time, image_view_location_icon, textview_event_location, image_view_points_icon, textview_points, textview_about_title, textview_about_description, card_view_host_image, text_view_hosted_by_label, text_view_host"
-                    tools:visibility="visible" />
-
-                <androidx.constraintlayout.widget.Group
-                    android:id="@+id/group_shimmer_skeleton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="@{safeUnbox(viewModel.itemDisplay._id != ``) ? View.GONE : View.VISIBLE}"
-                    app:constraint_referenced_ids="shimmer_layout_item_name, shimmer_layout_overall_points, shimmer_layout_completion_status, shimmer_layout_event_date, shimmer_layout_event_location, shimmer_layout_points, shimmer_layout_about_description, shimmer_layout_mechanics_description, shimmer_layout_host" />
-
-                <View
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_220"
-                    android:background="@color/colorGrey2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="wrap_content">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_view_item_banner"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="@dimen/dp_240"
-                    android:layout_marginHorizontal="@dimen/default_margin"
-                    android:layout_marginTop="@dimen/dp_88"
-                    app:cardCornerRadius="@dimen/default_card_view_radius"
-                    app:cardElevation="@dimen/dp_0"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    <androidx.constraintlayout.widget.Group
+                        android:id="@+id/group_required_event_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:constraint_referenced_ids="textview_overall_points, textview_completion_status, progress_bar_points, image_view_date_icon, textview_event_date, textview_event_time, image_view_location_icon, textview_event_location, image_view_points_icon, textview_points, textview_about_title, textview_about_description, card_view_host_image, text_view_hosted_by_label, text_view_host"
+                        tools:visibility="visible" />
+
+                    <androidx.constraintlayout.widget.Group
+                        android:id="@+id/group_shimmer_skeleton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{safeUnbox(viewModel.itemDisplay._id != ``) ? View.GONE : View.VISIBLE}"
+                        app:constraint_referenced_ids="shimmer_layout_item_name, shimmer_layout_overall_points, shimmer_layout_completion_status, shimmer_layout_event_date, shimmer_layout_event_location, shimmer_layout_points, shimmer_layout_about_description, shimmer_layout_mechanics_description, shimmer_layout_host" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_220"
+                        android:background="@color/colorGrey2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_view_item_banner"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="@dimen/dp_240"
+                        android:layout_marginHorizontal="@dimen/default_margin"
+                        android:layout_marginTop="@dimen/dp_88"
+                        app:cardCornerRadius="@dimen/default_card_view_radius"
+                        app:cardElevation="@dimen/dp_0"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/image_view_item_banner"
+                            imageUrl="@{viewModel.itemDisplay.coverPhotoUrl}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            tools:background="@color/colorGrey3" />
+                    </androidx.cardview.widget.CardView>
+
+                    <com.tinkerhub.replenish.common.ui.FontTextView
+                        android:id="@+id/textview_item_name"
+                        style="@style/TextAppearance.MaterialComponents.Headline4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:text="@{viewModel.itemDisplay.title}"
+                        android:textColor="@color/primaryTextColor"
+                        app:customTypeface="@font/archivo_bold"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintEnd_toEndOf="@id/card_view_item_banner"
+                        app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
+                        app:layout_constraintTop_toBottomOf="@id/card_view_item_banner"
+                        tools:text="3R Series: Waste Management" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer_layout_item_name"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="@dimen/dp_0"
+                        android:layout_marginVertical="@dimen/dp_8"
+                        android:background="@color/colorGrey3"
+                        app:layout_constraintBottom_toBottomOf="@id/textview_item_name"
+                        app:layout_constraintEnd_toEndOf="@id/textview_item_name"
+                        app:layout_constraintStart_toStartOf="@id/textview_item_name"
+                        app:layout_constraintTop_toTopOf="@id/textview_item_name"
+                        app:shimmer_auto_start="true"
+                        app:shimmer_base_alpha="0.7"
+                        app:shimmer_direction="left_to_right"
+                        app:shimmer_duration="1800"
+                        app:shimmer_highlight_alpha="0.6" />
+
+                    <com.tinkerhub.replenish.common.ui.FontTextView
+                        android:id="@+id/textview_overall_points"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_12"
+                        android:text="@{viewModel.itemDisplay.earnedPoints + `/` + (viewModel.itemDisplay.rewardPoints * viewModel.itemDisplay.maxAttemptsCount) + ` PTS`}"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="@dimen/sp_14"
+                        android:visibility="@{safeUnbox(viewModel.itemDisplay.earnedPoints != null &amp;&amp; viewModel.itemDisplay.earnedPoints != -1) ? View.VISIBLE : View.INVISIBLE}"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
+                        app:layout_constraintTop_toBottomOf="@id/textview_item_name"
+                        tools:text="0/30 PTS" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer_layout_overall_points"
+                        android:layout_width="@dimen/dp_80"
+                        android:layout_height="@dimen/dp_12"
+                        android:layout_marginVertical="@dimen/dp_2"
+                        android:background="@color/colorGrey3"
+                        app:layout_constraintBottom_toBottomOf="@id/textview_overall_points"
+                        app:layout_constraintStart_toStartOf="@id/textview_overall_points"
+                        app:layout_constraintTop_toTopOf="@id/textview_overall_points"
+                        app:shimmer_auto_start="true"
+                        app:shimmer_base_alpha="0.7"
+                        app:shimmer_direction="left_to_right"
+                        app:shimmer_duration="1800"
+                        app:shimmer_highlight_alpha="0.6" />
+
+                    <com.tinkerhub.replenish.common.ui.FontTextView
+                        android:id="@+id/textview_completion_status"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_12"
+                        android:text="@{viewModel.itemDisplay.attemptsCount + `/` + viewModel.itemDisplay.maxAttemptsCount + ` COMPLETED`}"
+                        android:textColor="@color/colorRed1"
+                        android:textSize="@dimen/sp_14"
+                        android:visibility="@{safeUnbox(viewModel.itemDisplay.attemptsCount != null &amp;&amp; viewModel.itemDisplay.attemptsCount != -1) ? View.VISIBLE : View.INVISIBLE}"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintEnd_toEndOf="@id/card_view_item_banner"
+                        app:layout_constraintTop_toBottomOf="@id/textview_item_name"
+                        tools:text="1/1 COMPLETED" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer_layout_completion_status"
+                        android:layout_width="@dimen/dp_110"
+                        android:layout_height="@dimen/dp_12"
+                        android:layout_marginVertical="@dimen/dp_2"
+                        android:background="@color/colorGrey3"
+                        app:layout_constraintBottom_toBottomOf="@id/textview_completion_status"
+                        app:layout_constraintEnd_toEndOf="@id/textview_completion_status"
+                        app:layout_constraintTop_toTopOf="@id/textview_completion_status"
+                        app:shimmer_auto_start="true"
+                        app:shimmer_base_alpha="0.7"
+                        app:shimmer_direction="left_to_right"
+                        app:shimmer_duration="1800"
+                        app:shimmer_highlight_alpha="0.6" />
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progress_bar_points"
+                        attemptsCount="@{viewModel.itemDisplay.attemptsCount}"
+                        maxAttemptsCount="@{viewModel.itemDisplay.maxAttemptsCount}"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:progress="50"
+                        android:theme="@style/PointsProgress"
+                        app:layout_constraintEnd_toEndOf="@id/card_view_item_banner"
+                        app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
+                        app:layout_constraintTop_toBottomOf="@id/textview_overall_points"
+                        app:trackCornerRadius="@dimen/default_card_view_radius"
+                        app:trackThickness="@dimen/dp_8" />
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/image_view_item_banner"
-                        imageUrl="@{viewModel.itemDisplay.coverPhotoUrl}"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        tools:background="@color/colorGrey3" />
-                </androidx.cardview.widget.CardView>
+                        android:id="@+id/image_view_date_icon"
+                        android:layout_width="@dimen/dp_24"
+                        android:layout_height="@dimen/dp_24"
+                        android:layout_marginTop="@dimen/dp_24"
+                        app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
+                        app:layout_constraintTop_toBottomOf="@id/progress_bar_points"
+                        app:srcCompat="@drawable/ic_calendar"
+                        app:tint="?android:textColorSecondary" />
 
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/textview_item_name"
-                    style="@style/TextAppearance.MaterialComponents.Headline4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@{viewModel.itemDisplay.title}"
-                    android:textColor="@color/primaryTextColor"
-                    app:customTypeface="@font/archivo_bold"
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintEnd_toEndOf="@id/card_view_item_banner"
-                    app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
-                    app:layout_constraintTop_toBottomOf="@id/card_view_item_banner"
-                    tools:text="3R Series: Waste Management" />
+                    <com.tinkerhub.replenish.common.ui.FontTextView
+                        android:id="@+id/textview_event_date"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        dateFormat="@{`MMM dd, yyyy`}"
+                        endDate="@{viewModel.itemDisplay.endDate}"
+                        startDate="@{viewModel.itemDisplay.startDate}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:textColor="@color/primaryTextColor"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintBottom_toTopOf="@id/textview_event_time"
+                        app:layout_constraintStart_toEndOf="@id/image_view_date_icon"
+                        app:layout_constraintTop_toTopOf="@id/image_view_date_icon"
+                        tools:text="June 30, 2021 - July 5, 2021" />
 
-                <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmer_layout_item_name"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="@dimen/dp_0"
-                    android:layout_marginVertical="@dimen/dp_8"
-                    android:background="@color/colorGrey3"
-                    app:layout_constraintBottom_toBottomOf="@id/textview_item_name"
-                    app:layout_constraintEnd_toEndOf="@id/textview_item_name"
-                    app:layout_constraintStart_toStartOf="@id/textview_item_name"
-                    app:layout_constraintTop_toTopOf="@id/textview_item_name"
-                    app:shimmer_auto_start="true"
-                    app:shimmer_base_alpha="0.7"
-                    app:shimmer_direction="left_to_right"
-                    app:shimmer_duration="1800"
-                    app:shimmer_highlight_alpha="0.6" />
+                    <com.tinkerhub.replenish.common.ui.FontTextView
+                        android:id="@+id/textview_event_time"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.itemDisplay.scheduleTime}"
+                        android:textColor="?android:textColorSecondary"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintBottom_toBottomOf="@id/image_view_date_icon"
+                        app:layout_constraintStart_toStartOf="@id/textview_event_date"
+                        app:layout_constraintTop_toBottomOf="@id/textview_event_date"
+                        tools:text="7:00 AM - 9:00 PM" />
 
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/textview_overall_points"
-                    style="@style/TextAppearance.MaterialComponents.Body1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_12"
-                    android:text="@{viewModel.itemDisplay.earnedPoints + `/` + (viewModel.itemDisplay.rewardPoints * viewModel.itemDisplay.maxAttemptsCount) + ` PTS`}"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/sp_14"
-                    android:visibility="@{safeUnbox(viewModel.itemDisplay.earnedPoints != null &amp;&amp; viewModel.itemDisplay.earnedPoints != -1) ? View.VISIBLE : View.INVISIBLE}"
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
-                    app:layout_constraintTop_toBottomOf="@id/textview_item_name"
-                    tools:text="0/30 PTS" />
-
-                <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmer_layout_overall_points"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="@dimen/dp_0"
-                    android:layout_marginVertical="@dimen/dp_2"
-                    android:background="@color/colorGrey3"
-                    app:layout_constraintBottom_toBottomOf="@id/textview_overall_points"
-                    app:layout_constraintEnd_toEndOf="@id/textview_overall_points"
-                    app:layout_constraintStart_toStartOf="@id/textview_overall_points"
-                    app:layout_constraintTop_toTopOf="@id/textview_overall_points"
-                    app:shimmer_auto_start="true"
-                    app:shimmer_base_alpha="0.7"
-                    app:shimmer_direction="left_to_right"
-                    app:shimmer_duration="1800"
-                    app:shimmer_highlight_alpha="0.6" />
-
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/textview_completion_status"
-                    style="@style/TextAppearance.MaterialComponents.Body1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_12"
-                    android:text="@{viewModel.itemDisplay.attemptsCount + `/` + viewModel.itemDisplay.maxAttemptsCount + ` COMPLETED`}"
-                    android:textColor="@color/colorRed1"
-                    android:textSize="@dimen/sp_14"
-                    android:visibility="@{safeUnbox(viewModel.itemDisplay.attemptsCount != null &amp;&amp; viewModel.itemDisplay.attemptsCount != -1) ? View.VISIBLE : View.INVISIBLE}"
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintEnd_toEndOf="@id/card_view_item_banner"
-                    app:layout_constraintTop_toBottomOf="@id/textview_item_name"
-                    tools:text="1/1 COMPLETED" />
-
-                <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmer_layout_completion_status"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="@dimen/dp_0"
-                    android:layout_marginVertical="@dimen/dp_2"
-                    android:background="@color/colorGrey3"
-                    app:layout_constraintBottom_toBottomOf="@id/textview_completion_status"
-                    app:layout_constraintEnd_toEndOf="@id/textview_completion_status"
-                    app:layout_constraintStart_toStartOf="@id/textview_completion_status"
-                    app:layout_constraintTop_toTopOf="@id/textview_completion_status"
-                    app:shimmer_auto_start="true"
-                    app:shimmer_base_alpha="0.7"
-                    app:shimmer_direction="left_to_right"
-                    app:shimmer_duration="1800"
-                    app:shimmer_highlight_alpha="0.6" />
-
-                <com.google.android.material.progressindicator.LinearProgressIndicator
-                    android:id="@+id/progress_bar_points"
-                    attemptsCount="@{viewModel.itemDisplay.attemptsCount}"
-                    maxAttemptsCount="@{viewModel.itemDisplay.maxAttemptsCount}"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_4"
-                    android:progress="50"
-                    android:theme="@style/PointsProgress"
-                    app:layout_constraintEnd_toEndOf="@id/card_view_item_banner"
-                    app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
-                    app:layout_constraintTop_toBottomOf="@id/textview_overall_points"
-                    app:trackCornerRadius="@dimen/default_card_view_radius"
-                    app:trackThickness="@dimen/dp_8" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/image_view_date_icon"
-                    android:layout_width="@dimen/dp_24"
-                    android:layout_height="@dimen/dp_24"
-                    android:layout_marginTop="@dimen/dp_24"
-                    app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
-                    app:layout_constraintTop_toBottomOf="@id/progress_bar_points"
-                    app:srcCompat="@drawable/ic_calendar"
-                    app:tint="?android:textColorSecondary" />
-
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/textview_event_date"
-                    style="@style/TextAppearance.MaterialComponents.Body1"
-                    dateFormat="@{`MMM dd, yyyy`}"
-                    endDate="@{viewModel.itemDisplay.endDate}"
-                    startDate="@{viewModel.itemDisplay.startDate}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_8"
-                    android:textColor="@color/primaryTextColor"
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintBottom_toTopOf="@id/textview_event_time"
-                    app:layout_constraintStart_toEndOf="@id/image_view_date_icon"
-                    app:layout_constraintTop_toTopOf="@id/image_view_date_icon"
-                    tools:text="June 30, 2021 - July 5, 2021" />
-
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/textview_event_time"
-                    style="@style/TextAppearance.MaterialComponents.Body1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.itemDisplay.scheduleTime}"
-                    android:textColor="?android:textColorSecondary"
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintBottom_toBottomOf="@id/image_view_date_icon"
-                    app:layout_constraintStart_toStartOf="@id/textview_event_date"
-                    app:layout_constraintTop_toBottomOf="@id/textview_event_date"
-                    tools:text="7:00 AM - 9:00 PM" />
-
-                <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmer_layout_event_date"
-                    android:layout_width="@dimen/dp_200"
-                    android:layout_height="@dimen/dp_0"
-                    android:layout_marginVertical="@dimen/dp_2"
-                    android:background="@color/colorGrey3"
-                    app:layout_constraintBottom_toBottomOf="@id/image_view_date_icon"
-                    app:layout_constraintStart_toStartOf="@id/textview_event_date"
-                    app:layout_constraintTop_toTopOf="@id/image_view_date_icon"
-                    app:shimmer_auto_start="true"
-                    app:shimmer_base_alpha="0.7"
-                    app:shimmer_direction="left_to_right"
-                    app:shimmer_duration="1800"
-                    app:shimmer_highlight_alpha="0.6" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/image_view_location_icon"
-                    android:layout_width="@dimen/dp_24"
-                    android:layout_height="@dimen/dp_24"
-                    android:layout_marginTop="@dimen/dp_12"
-                    app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
-                    app:layout_constraintTop_toBottomOf="@id/textview_event_time"
-                    app:srcCompat="@drawable/ic_location"
-                    app:tint="?android:textColorSecondary" />
-
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/textview_event_location"
-                    style="@style/TextAppearance.MaterialComponents.Body1"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_8"
-                    android:ellipsize="end"
-                    android:lineSpacingExtra="@dimen/dp_4"
-                    android:maxLines="2"
-                    android:text="@{viewModel.itemDisplay.location}"
-                    android:textColor="@color/primaryTextColor"
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintBottom_toBottomOf="@id/image_view_location_icon"
-                    app:layout_constraintEnd_toEndOf="@id/card_view_item_banner"
-                    app:layout_constraintStart_toEndOf="@id/image_view_location_icon"
-                    app:layout_constraintTop_toTopOf="@id/image_view_location_icon"
-                    app:layout_constraintVertical_bias="0.3"
-                    tools:text="2118 Thornridge Cir. Syracuse, Connecticut 35624" />
-
-                <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmer_layout_event_location"
-                    android:layout_width="@dimen/dp_240"
-                    android:layout_height="@dimen/dp_0"
-                    android:layout_marginVertical="@dimen/dp_2"
-                    android:background="@color/colorGrey3"
-                    app:layout_constraintBottom_toBottomOf="@id/textview_event_location"
-                    app:layout_constraintStart_toStartOf="@id/textview_event_location"
-                    app:layout_constraintTop_toTopOf="@id/textview_event_location"
-                    app:shimmer_auto_start="true"
-                    app:shimmer_base_alpha="0.7"
-                    app:shimmer_direction="left_to_right"
-                    app:shimmer_duration="1800"
-                    app:shimmer_highlight_alpha="0.6" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/image_view_points_icon"
-                    android:layout_width="@dimen/dp_24"
-                    android:layout_height="@dimen/dp_24"
-                    android:layout_marginTop="@dimen/dp_12"
-                    app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
-                    app:layout_constraintTop_toBottomOf="@id/textview_event_location"
-                    app:srcCompat="@drawable/ic_ticket"
-                    app:tint="?android:textColorSecondary" />
-
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/textview_points"
-                    style="@style/TextAppearance.MaterialComponents.Body1"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_8"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:text="@{viewModel.itemDisplay.rewardPoints + ` PTS`}"
-                    android:textColor="@color/primaryTextColor"
-                    android:visibility="@{safeUnbox(viewModel.itemDisplay.rewardPoints != -1) ? View.VISIBLE : View.INVISIBLE}"
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintBottom_toBottomOf="@id/image_view_points_icon"
-                    app:layout_constraintEnd_toEndOf="@id/card_view_item_banner"
-                    app:layout_constraintStart_toEndOf="@id/image_view_points_icon"
-                    app:layout_constraintTop_toTopOf="@id/image_view_points_icon"
-                    tools:text="30 PTS" />
-
-                <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmer_layout_points"
-                    android:layout_width="@dimen/dp_120"
-                    android:layout_height="@dimen/dp_0"
-                    android:layout_marginVertical="@dimen/dp_2"
-                    android:background="@color/colorGrey3"
-                    app:layout_constraintBottom_toBottomOf="@id/textview_points"
-                    app:layout_constraintStart_toStartOf="@id/textview_points"
-                    app:layout_constraintTop_toTopOf="@id/textview_points"
-                    app:shimmer_auto_start="true"
-                    app:shimmer_base_alpha="0.7"
-                    app:shimmer_direction="left_to_right"
-                    app:shimmer_duration="1800"
-                    app:shimmer_highlight_alpha="0.6" />
-
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/textview_about_title"
-                    style="@style/TextAppearance.MaterialComponents.Headline6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_24"
-                    android:text="@string/about_title"
-                    android:textAlignment="center"
-                    android:textColor="@color/primaryTextColor"
-                    app:customTypeface="@font/archivo_bold"
-                    app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
-                    app:layout_constraintTop_toBottomOf="@id/textview_points"
-                    tools:text="About" />
-
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/textview_about_description"
-                    style="@style/TextAppearance.MaterialComponents.Body1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:lineSpacingExtra="@dimen/dp_6"
-                    android:text="@{viewModel.itemDisplay.about}"
-                    android:textColor="@color/primaryTextColor"
-                    android:textSize="@dimen/sp_16"
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintEnd_toEndOf="@id/card_view_item_banner"
-                    app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
-                    app:layout_constraintTop_toBottomOf="@id/textview_about_title"
-                    app:layout_constraintVertical_bias="0"
-                    app:layout_constraintVertical_chainStyle="packed"
-                    tools:text="@tools:sample/lorem/random[70]" />
-
-                <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmer_layout_about_description"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="@dimen/dp_0"
-                    android:background="@color/colorGrey3"
-                    app:layout_constraintBottom_toBottomOf="@id/textview_about_description"
-                    app:layout_constraintEnd_toEndOf="@id/textview_about_description"
-                    app:layout_constraintStart_toStartOf="@id/textview_about_description"
-                    app:layout_constraintTop_toTopOf="@id/textview_about_description"
-                    app:shimmer_auto_start="true"
-                    app:shimmer_base_alpha="0.7"
-                    app:shimmer_direction="left_to_right"
-                    app:shimmer_duration="1800"
-                    app:shimmer_highlight_alpha="0.6" />
-
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/textview_mechanics_title"
-                    style="@style/TextAppearance.MaterialComponents.Headline6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_24"
-                    android:text="@string/mechanics_title"
-                    android:textAlignment="center"
-                    android:textColor="@color/primaryTextColor"
-                    app:customTypeface="@font/archivo_bold"
-                    app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
-                    app:layout_constraintTop_toBottomOf="@id/textview_about_description" />
-
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/textview_mechanics_description"
-                    style="@style/TextAppearance.MaterialComponents.Body1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:layout_marginBottom="@dimen/dp_24"
-                    android:lineSpacingExtra="@dimen/dp_6"
-                    android:text="@{viewModel.itemDisplay.mechanics}"
-                    android:textColor="@color/primaryTextColor"
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintBottom_toTopOf="@id/card_view_host_image"
-                    app:layout_constraintEnd_toEndOf="@id/card_view_item_banner"
-                    app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
-                    app:layout_constraintTop_toBottomOf="@id/textview_mechanics_title"
-                    app:layout_constraintVertical_bias="0"
-                    app:layout_constraintVertical_chainStyle="packed"
-                    tools:text="@tools:sample/lorem/random[70]" />
-
-                <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmer_layout_mechanics_description"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="@dimen/dp_0"
-                    android:background="@color/colorGrey3"
-                    app:layout_constraintBottom_toBottomOf="@id/textview_mechanics_description"
-                    app:layout_constraintEnd_toEndOf="@id/textview_mechanics_description"
-                    app:layout_constraintStart_toStartOf="@id/textview_mechanics_description"
-                    app:layout_constraintTop_toTopOf="@id/textview_mechanics_description"
-                    app:shimmer_auto_start="true"
-                    app:shimmer_base_alpha="0.7"
-                    app:shimmer_direction="left_to_right"
-                    app:shimmer_duration="1800"
-                    app:shimmer_highlight_alpha="0.6" />
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_view_host_image"
-                    android:layout_width="@dimen/default_icon_dimens"
-                    android:layout_height="@dimen/default_icon_dimens"
-                    android:layout_marginBottom="@dimen/default_margin"
-                    android:background="@color/design_default_color_primary"
-                    app:cardCornerRadius="@dimen/dp_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
-                    app:layout_constraintTop_toBottomOf="@id/textview_mechanics_description">
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer_layout_event_date"
+                        android:layout_width="@dimen/dp_200"
+                        android:layout_height="@dimen/dp_0"
+                        android:layout_marginVertical="@dimen/dp_2"
+                        android:background="@color/colorGrey3"
+                        app:layout_constraintBottom_toBottomOf="@id/image_view_date_icon"
+                        app:layout_constraintStart_toStartOf="@id/textview_event_date"
+                        app:layout_constraintTop_toTopOf="@id/image_view_date_icon"
+                        app:shimmer_auto_start="true"
+                        app:shimmer_base_alpha="0.7"
+                        app:shimmer_direction="left_to_right"
+                        app:shimmer_duration="1800"
+                        app:shimmer_highlight_alpha="0.6" />
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/image_view_host_image"
-                        imageUrl="@{viewModel.itemDisplay.coverPhotoUrl}"
+                        android:id="@+id/image_view_location_icon"
+                        android:layout_width="@dimen/dp_24"
+                        android:layout_height="@dimen/dp_24"
+                        android:layout_marginTop="@dimen/dp_12"
+                        app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
+                        app:layout_constraintTop_toBottomOf="@id/textview_event_time"
+                        app:srcCompat="@drawable/ic_location"
+                        app:tint="?android:textColorSecondary" />
+
+                    <com.tinkerhub.replenish.common.ui.FontTextView
+                        android:id="@+id/textview_event_location"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:ellipsize="end"
+                        android:lineSpacingExtra="@dimen/dp_4"
+                        android:maxLines="2"
+                        android:text="@{viewModel.itemDisplay.location}"
+                        android:textColor="@color/primaryTextColor"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintBottom_toBottomOf="@id/image_view_location_icon"
+                        app:layout_constraintEnd_toEndOf="@id/card_view_item_banner"
+                        app:layout_constraintStart_toEndOf="@id/image_view_location_icon"
+                        app:layout_constraintTop_toTopOf="@id/image_view_location_icon"
+                        app:layout_constraintVertical_bias="0.3"
+                        tools:text="2118 Thornridge Cir. Syracuse, Connecticut 35624" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer_layout_event_location"
+                        android:layout_width="@dimen/dp_240"
+                        android:layout_height="@dimen/dp_0"
+                        android:layout_marginVertical="@dimen/dp_2"
+                        android:background="@color/colorGrey3"
+                        app:layout_constraintBottom_toBottomOf="@id/textview_event_location"
+                        app:layout_constraintStart_toStartOf="@id/textview_event_location"
+                        app:layout_constraintTop_toTopOf="@id/textview_event_location"
+                        app:shimmer_auto_start="true"
+                        app:shimmer_base_alpha="0.7"
+                        app:shimmer_direction="left_to_right"
+                        app:shimmer_duration="1800"
+                        app:shimmer_highlight_alpha="0.6" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image_view_points_icon"
+                        android:layout_width="@dimen/dp_24"
+                        android:layout_height="@dimen/dp_24"
+                        android:layout_marginTop="@dimen/dp_12"
+                        app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
+                        app:layout_constraintTop_toBottomOf="@id/textview_event_location"
+                        app:srcCompat="@drawable/ic_ticket"
+                        app:tint="?android:textColorSecondary" />
+
+                    <com.tinkerhub.replenish.common.ui.FontTextView
+                        android:id="@+id/textview_points"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="@{viewModel.itemDisplay.rewardPoints + ` PTS`}"
+                        android:textColor="@color/primaryTextColor"
+                        android:visibility="@{safeUnbox(viewModel.itemDisplay.rewardPoints != -1 &amp;&amp; viewModel.itemDisplay.about != null) ? View.VISIBLE : View.GONE}"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintBottom_toBottomOf="@id/image_view_points_icon"
+                        app:layout_constraintEnd_toEndOf="@id/card_view_item_banner"
+                        app:layout_constraintStart_toEndOf="@id/image_view_points_icon"
+                        app:layout_constraintTop_toTopOf="@id/image_view_points_icon"
+                        tools:text="30 PTS" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer_layout_points"
+                        android:layout_width="@dimen/dp_120"
+                        android:layout_height="@dimen/dp_0"
+                        android:layout_marginVertical="@dimen/dp_2"
+                        android:background="@color/colorGrey3"
+                        app:layout_constraintBottom_toBottomOf="@id/image_view_points_icon"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="@id/shimmer_layout_event_date"
+                        app:layout_constraintTop_toTopOf="@id/image_view_points_icon"
+                        app:shimmer_auto_start="true"
+                        app:shimmer_base_alpha="0.7"
+                        app:shimmer_direction="left_to_right"
+                        app:shimmer_duration="1800"
+                        app:shimmer_highlight_alpha="0.6" />
+
+                    <com.tinkerhub.replenish.common.ui.FontTextView
+                        android:id="@+id/textview_about_title"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:text="@string/about_title"
+                        android:textAlignment="center"
+                        android:textColor="@color/primaryTextColor"
+                        app:customTypeface="@font/archivo_bold"
+                        app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
+                        app:layout_constraintTop_toBottomOf="@id/textview_points"
+                        tools:text="About" />
+
+                    <com.tinkerhub.replenish.common.ui.FontTextView
+                        android:id="@+id/textview_about_description"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@mipmap/ic_launcher" />
-                </androidx.cardview.widget.CardView>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:lineSpacingExtra="@dimen/dp_6"
+                        android:text="@{viewModel.itemDisplay.about}"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="@dimen/sp_16"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintEnd_toEndOf="@id/card_view_item_banner"
+                        app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
+                        app:layout_constraintTop_toBottomOf="@id/textview_about_title"
+                        app:layout_constraintVertical_bias="0"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        tools:text="@tools:sample/lorem/random[70]" />
 
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/text_view_hosted_by_label"
-                    style="@style/TextAppearance.MaterialComponents.Body1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_8"
-                    android:text="@string/hosted_by_label"
-                    android:textSize="@dimen/sp_16"
-                    android:visibility="@{safeUnbox(viewModel.itemDisplay._id != `` &amp;&amp; viewModel.itemDisplay.location != null) ? View.VISIBLE : View.GONE}"
-                    app:customTypeface="@font/archivo_bold"
-                    app:layout_constraintBottom_toBottomOf="@id/card_view_host_image"
-                    app:layout_constraintStart_toEndOf="@id/card_view_host_image"
-                    app:layout_constraintTop_toTopOf="@id/card_view_host_image" />
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer_layout_about_description"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="@dimen/dp_0"
+                        android:background="@color/colorGrey3"
+                        app:layout_constraintBottom_toBottomOf="@id/textview_about_description"
+                        app:layout_constraintEnd_toEndOf="@id/textview_about_description"
+                        app:layout_constraintStart_toStartOf="@id/textview_about_description"
+                        app:layout_constraintTop_toTopOf="@id/textview_about_description"
+                        app:shimmer_auto_start="true"
+                        app:shimmer_base_alpha="0.7"
+                        app:shimmer_direction="left_to_right"
+                        app:shimmer_duration="1800"
+                        app:shimmer_highlight_alpha="0.6" />
 
-                <com.tinkerhub.replenish.common.ui.FontTextView
-                    android:id="@+id/text_view_host"
-                    style="@style/TextAppearance.MaterialComponents.Body1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_4"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="@{viewModel.itemDisplay.organizer.name}"
-                    android:textSize="@dimen/sp_16"
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintBottom_toBottomOf="@id/card_view_host_image"
-                    app:layout_constraintEnd_toEndOf="@id/card_view_item_banner"
-                    app:layout_constraintStart_toEndOf="@id/text_view_hosted_by_label"
-                    app:layout_constraintTop_toTopOf="@id/card_view_host_image"
-                    tools:text="Plasticity Community" />
+                    <com.tinkerhub.replenish.common.ui.FontTextView
+                        android:id="@+id/textview_mechanics_title"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:text="@string/mechanics_title"
+                        android:textAlignment="center"
+                        android:textColor="@color/primaryTextColor"
+                        app:customTypeface="@font/archivo_bold"
+                        app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
+                        app:layout_constraintTop_toBottomOf="@id/textview_about_description" />
 
-                <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmer_layout_host"
-                    android:layout_width="@dimen/dp_200"
-                    android:layout_height="@dimen/dp_0"
-                    android:background="@color/colorGrey3"
-                    app:layout_constraintBottom_toBottomOf="@id/text_view_hosted_by_label"
-                    app:layout_constraintEnd_toEndOf="@id/text_view_host"
-                    app:layout_constraintHorizontal_bias="0"
-                    app:layout_constraintStart_toStartOf="@id/text_view_hosted_by_label"
-                    app:layout_constraintTop_toTopOf="@id/text_view_hosted_by_label"
-                    app:shimmer_auto_start="true"
-                    app:shimmer_base_alpha="0.7"
-                    app:shimmer_direction="left_to_right"
-                    app:shimmer_duration="1800"
-                    app:shimmer_highlight_alpha="0.6" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
+                    <com.tinkerhub.replenish.common.ui.FontTextView
+                        android:id="@+id/textview_mechanics_description"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginBottom="@dimen/dp_24"
+                        android:lineSpacingExtra="@dimen/dp_6"
+                        android:text="@{viewModel.itemDisplay.mechanics}"
+                        android:textColor="@color/primaryTextColor"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintBottom_toTopOf="@id/card_view_host_image"
+                        app:layout_constraintEnd_toEndOf="@id/card_view_item_banner"
+                        app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
+                        app:layout_constraintTop_toBottomOf="@id/textview_mechanics_title"
+                        app:layout_constraintVertical_bias="0"
+                        app:layout_constraintVertical_chainStyle="packed"
+                        tools:text="@tools:sample/lorem/random[70]" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer_layout_mechanics_description"
+                        android:layout_width="@dimen/dp_0"
+                        android:layout_height="@dimen/dp_0"
+                        android:background="@color/colorGrey3"
+                        app:layout_constraintBottom_toBottomOf="@id/textview_mechanics_description"
+                        app:layout_constraintEnd_toEndOf="@id/textview_mechanics_description"
+                        app:layout_constraintStart_toStartOf="@id/textview_mechanics_description"
+                        app:layout_constraintTop_toTopOf="@id/textview_mechanics_description"
+                        app:shimmer_auto_start="true"
+                        app:shimmer_base_alpha="0.7"
+                        app:shimmer_direction="left_to_right"
+                        app:shimmer_duration="1800"
+                        app:shimmer_highlight_alpha="0.6" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_view_host_image"
+                        android:layout_width="@dimen/default_icon_dimens"
+                        android:layout_height="@dimen/default_icon_dimens"
+                        android:layout_marginBottom="@dimen/default_margin"
+                        android:background="@color/design_default_color_primary"
+                        app:cardCornerRadius="@dimen/dp_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/card_view_item_banner"
+                        app:layout_constraintTop_toBottomOf="@id/textview_mechanics_description">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/image_view_host_image"
+                            imageUrl="@{viewModel.itemDisplay.coverPhotoUrl}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@mipmap/ic_launcher" />
+                    </androidx.cardview.widget.CardView>
+
+                    <com.tinkerhub.replenish.common.ui.FontTextView
+                        android:id="@+id/text_view_hosted_by_label"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:text="@string/hosted_by_label"
+                        android:textSize="@dimen/sp_16"
+                        android:visibility="@{safeUnbox(viewModel.itemDisplay._id != `` &amp;&amp; viewModel.itemDisplay.location != null) ? View.VISIBLE : View.INVISIBLE}"
+                        app:customTypeface="@font/archivo_bold"
+                        app:layout_constraintBottom_toBottomOf="@id/card_view_host_image"
+                        app:layout_constraintStart_toEndOf="@id/card_view_host_image"
+                        app:layout_constraintTop_toTopOf="@id/card_view_host_image" />
+
+                    <com.tinkerhub.replenish.common.ui.FontTextView
+                        android:id="@+id/text_view_host"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_4"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@{viewModel.itemDisplay.organizer.name}"
+                        android:textSize="@dimen/sp_16"
+                        app:layout_constrainedWidth="true"
+                        app:layout_constraintBottom_toBottomOf="@id/card_view_host_image"
+                        app:layout_constraintEnd_toEndOf="@id/card_view_item_banner"
+                        app:layout_constraintStart_toEndOf="@id/text_view_hosted_by_label"
+                        app:layout_constraintTop_toTopOf="@id/card_view_host_image"
+                        tools:text="Plasticity Community" />
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer_layout_host"
+                        android:layout_width="@dimen/dp_200"
+                        android:layout_height="@dimen/dp_0"
+                        android:background="@color/colorGrey3"
+                        app:layout_constraintBottom_toBottomOf="@id/text_view_hosted_by_label"
+                        app:layout_constraintEnd_toEndOf="@id/text_view_host"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="@id/text_view_hosted_by_label"
+                        app:layout_constraintTop_toTopOf="@id/text_view_hosted_by_label"
+                        app:shimmer_auto_start="true"
+                        app:shimmer_base_alpha="0.7"
+                        app:shimmer_direction="left_to_right"
+                        app:shimmer_duration="1800"
+                        app:shimmer_highlight_alpha="0.6" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_action"
@@ -552,5 +556,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="Yes, I'd like to join" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

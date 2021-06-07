@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tinkerhub.replenish.common.utils.Event
@@ -17,6 +18,7 @@ import com.tinkerhub.replenish.data.models.RewardItem
 import com.tinkerhub.replenish.databinding.FragmentRewardsTabBinding
 import com.tinkerhub.replenish.features.profile.rewards.RewardsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RewardsTabFragment : Fragment(), RewardItemAdapter.RewardItemListener {
@@ -68,6 +70,13 @@ class RewardsTabFragment : Fragment(), RewardItemAdapter.RewardItemListener {
         binding.recyclerViewRewards.apply {
             adapter = rewardItemAdapter
             layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
+        }
+        
+        binding.layoutSwipeToRefresh.setOnRefreshListener {
+            viewModel.viewModelScope.launch {
+                rewardsViewModel.loadRewards(redeemed = viewModel.isRedeemedTab)
+                binding.layoutSwipeToRefresh.isRefreshing = false
+            }
         }
     }
     

@@ -13,6 +13,7 @@ import com.facebook.shimmer.ShimmerDrawable
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.tinkerhub.replenish.R
 import com.tinkerhub.replenish.common.extensions.formatUTCDate
+import kotlin.Float.Companion.POSITIVE_INFINITY
 
 @BindingAdapter("imageUrl")
 fun setImageUrl(imageView: AppCompatImageView, imageUrl: String?) {
@@ -94,7 +95,7 @@ fun setUserBadge(textView: AppCompatTextView, userPoints: Int?) {
                 textView.text = getString(R.string.gold_badge)
                 textView.setTextColor(getColor(R.color.goldRankTextColor))
             }
-            in (301..400) -> {
+            in (301..POSITIVE_INFINITY.toInt()) -> {
                 textView.background = getResourceDrawable(R.drawable.background_platinum_badge)
                 textView.text = getString(R.string.platinum_badge)
                 textView.setTextColor(getColor(R.color.platinumRankTextColor))
